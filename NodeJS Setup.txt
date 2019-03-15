@@ -1,7 +1,7 @@
 - Open cmdline (Bash, whatever) and run `npm i express -g'
 -- This will install ExpressJS globally (lets you run from cmdline), instead of specifically to your folder/project. I believe it stores ExpressJS modules in %APPDATA%
 
-- Run express <projectname>: this will create a barebones project and folder hierarchy: My Documents\<projectname>
+- Run express --view=pug <projectname>: this will create a barebones project and folder hierarchy: My Documents\<projectname>
 
 - cd to your project location (like My Documents)
 
@@ -27,3 +27,4 @@ I'm not familiar with it, my first project I disabled templating and used basic 
 Different templating engines include Pug (used to be Jade), EJS (common, my friend suggested that one), Mustache, etc...
 
 https://developer.ibm.com/node/2014/11/11/compare-javascript-templates-jade-mustache-dust/
+
