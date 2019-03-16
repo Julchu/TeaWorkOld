@@ -9,69 +9,63 @@ const uri = "mongodb://heroku_v670xkbh:km62gbjl3mf08ajvul3a7q49c8@ds051524.mlab.
 
 mongoose.connect(uri, {useNewUrlParser: true});
 
-let wifiSchema = mongoose.Schema({
-	availability: {type: Boolean, default: false},
-	name: {type: String, default: ""},
-	// TODO: encrypt password
-	password: {type: String, default: ""},
-	speed: {type: String, default: ""}
-});
-
 // Describing schema (class attributes) cafeSchema for Cafe class
-let cafeSchema = mongoose.Schema({
+let cafeSchema = new mongoose.Schema({
 	name: {type: String, default: ""},
-	type: {type: String, default: "cafe"},
-	wifi: {type: wifiSchema, default: () => ({
-		availability: true, 
-		name: eduroam, 
-		speed: "slow"})
+
+	// Establishment type
+	type: {
+		type: String,
+		default: "Cafe",
+		enum: ["Restaurant", "Cafe", "Other"]
 	},
-	bathroom: {type: Boolean, default: false},
+	wifi: {
+		available: {type: Boolean, default: false},
+		name: {type: String, default: ""},
+		
+		// TODO: encrypt password
+		password: {type: String, default: ""},
+		fast: {type: Boolean, default: false}
+	},
+	outlet: {type: Boolean, default: false},
+	bathroom: {
+		available: {type: Boolean, default: false},
+		locked: {type: Boolean, default: false},
+		clean: {type: Boolean, default: false}
+	},
+	clean: {type: Boolean, default: true},
+	busy: {
+		morning: {type: Boolean, default: false},
+		afternoon: {type: Boolean, default: false},
+		evening: {type: Boolean, default: false}
+	},
+	climate: {
+		type: String, 
+		enum: ["Air-conditioned", "Heated", "Ventilated", "Stuffy"]
+	}
 });
 
-let Cafe = mongoose.model('Cafe', cafeSchema);
-let Wifi = mongoose.model('Wifi', wifiSchema);
+let Cafe = mongoose.model("Cafe", cafeSchema);
 
-// let addWifi = function(availability, name, password, speed) {
-// 	let wifi = new Wifi({
-// 		availability: availability,
-// 		name: name, //req.params.name,
-// 		password: password,
-// 		speed: speed
-// 	});
+let addWifi = function(available, name, password, speed) {
+	let wifi = new Wifi({
+		available: available,
+		name: name, //req.params.name,
+		password: password,
+		speed: speed
+	});
+	wifi.save();
+	return wifi;
+};
 
-// 	wifi.save();
-// };
+
 
 router.post('/', function (req, res, next) {
-
+	addWifi(req.body.available, req.body.name, req.body.password, req.body.speed)
 });
 
 router.get('/', function(req, res, next) {
-	res.render('cafes', { title: 'Cafes' });
+	res.render('cafes', { title: "Cafes" });
 });
 
 module.exports = router;
-
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-// 	res.send('respond with a resource');
-// });
-
-// let UserSchema = new Schema({
-// 	statuses: {
-// 		online: {
-// 			type: Boolean,
-// 			default: true
-// 		},
-// 		verified: {
-// 			type: Boolean,
-// 			default: false
-// 		},
-// 		banned: {
-// 			type: Boolean,
-// 			default: false
-// 		}
-// 	},
-// 	//...
-// })
