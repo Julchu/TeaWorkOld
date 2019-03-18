@@ -89,6 +89,8 @@
 // REST API
 /*
 	// Paramaters vs arguments for queries
+
+	// req.params
 	
 	Params is for url-values
 		Ex: /user/:id -> req.params.id
@@ -96,20 +98,79 @@
 	Queries: req.query contains the query params of the request.
 		Ex: sample.com?arg=true&cheese=bad, req.query would be {arg:"true"}
 
+	Router path: /users/:userId/books/:bookId
+	Request URL: http://localhost:3000/users/34/books/8989
+	req.params: { "userId": "34", "bookId": "8989" }
+
+	The name of route parameters must be made up of “word characters” ([A-Za-z0-9_])
+
+	Route path: /flights/:from-:to
+	Request URL: http://localhost:3000/flights/LAX-SFO
+	req.params: { "from": "LAX", "to": "SFO" }
+
+	Route path: /plantae/:genus.:species
+	Request URL: http://localhost:3000/plantae/Prunus.persica
+	req.params: { "genus": "Prunus", "species": "persica" }
+
+	// req.body 
+
+	Contains anything in the request body. Typically this is used on PUT and POST requests.
+
+
 	req.body contains anything in the request body. Typically this is used on PUT and POST requests.
 
 	For example a POST to sample.com with the body of {"foo":"bar"} and a header of type application/json, req.body would contain {foo: "bar"}
 
+	// POST user[name]=tobi&user[email]=tobi@learnboost.com
+	req.body.user.name
+	// => "tobi"
+
+	req.body.user.email
+	// => "tobi@learnboost.com"
+
+	// POST { "name": "tobi" }
+	req.body.name
+	// => "tobi"
+
 	if you were to use req.body instead of req.query, it would most likely not find anything in the body, and therefore not be able to validate the jwt.
 
-	GET: retrieve
+	CRUD
 	POST: create
+	GET: read/retrieve
 	PUT: insert
 	PATCH: update
 	DELETE: delete
+
+
+	Let's look at one of your examples.
+
+	{ "username": "skwee357", "email": "skwee357@domain.com" }
+	If you POST this document to /users, as you suggest, then you might get back an entity such as
+
+	## /users/1
+
+	{
+	    "username": "skwee357",
+	    "email": "skwee357@domain.com"
+	}
+	If you want to modify this entity later, you choose between PUT and PATCH. A PUT might look like this:
+
+	PUT /users/1
+	{
+	    "username": "skwee357",
+	    "email": "skwee357@gmail.com"       // new email address
+	}
+	You can accomplish the same using PATCH. That might look like this:
+
+	PATCH /users/1
+	{
+	    "email": "skwee357@gmail.com"       // new email address
+	}
 */
 
 // MongoDB / Mongoose
+	// Mongoose.model() API structure: Mongoose#model(name, [schema], [collection], [skipInit])
+
 	// Static methods: does not require instantiating; attributes are class-wide
 	animalSchema.statics.findByName = function(name, cb) {
 	    return this.find({ name: new RegExp(name, 'i') }, cb);
@@ -120,10 +181,10 @@
 		return this.model('Animal').find({ type: this.type }, cb);
 	};
 
-	// Working example of collection, object, save
+	// Schema, model(Schema) method
 	const animalSchema = mongoose.Schema({
-		name: 	String,
-		type: 	String,
+		name: {type: String, default: ""},
+		type: {type: String, default: ""},
 		sound: 	String
 	});
 
@@ -131,7 +192,15 @@
 		console.log(this.sound);
 	}
 
-	const Animal = mongoose.model('animal', animalSchema);
+	// First argument of model(String, Schema): table will be created with name String
+	const Animal = mongoose.model('Animal', animalSchema);
+
+	// or model({schema parameters}) method
+	const Animal = mongoose.model("Animal", {
+		name: {type: String, default: ""},
+		type: {type: String, default: ""},
+		sound: String
+	});
 
 	const cat = new Animal({
 		name: 	'Dawg', 
@@ -147,7 +216,7 @@
 			cat.speak();
 		}
 	});
-	// Option 2 to save: only creates bareoAnimal document
+		// Option 2 to save: only creates Animal document
 	Animal.create({});
 
 	// Searches Wifi document model (const Wifi = mongoose.model('Wifi, wifiSchema);)
@@ -158,6 +227,48 @@
 		console.log(wifiNetwork);
 	});
 
+	// Schema subschema type: https://stackoverflow.com/questions/42019679/object-type-in-mongoose
+
+	//	let wifiSchema = mongoose.Schema({
+	// 	availability: {type: Boolean, default: false},
+	// 	name: {type: String, default: ""},
+	// 	// TODO: encrypt password
+	// 	password: {type: String, default: ""},
+	// 	speed: {type: String, default: ""}
+	// });
+
+	// let bathroomSchema = mongoose.Schema({
+	// 	availability: {type: Boolean, default: false}
+		
+	// }):
+
+	// // Describing schema (class attributes) cafeSchema for Cafe class
+	// let cafeSchema = mongoose.Schema({
+	// 	name: {type: String, default: ""},
+	// 	type: {type: String, default: "cafe"},
+	// 	wifi: {type: wifiSchema, default: () => ({
+	// 		availability: false, 
+	// 		name: "", 
+	// 		speed: ""})
+	// 	},
+	// 	bathroom: {type: bathroomSchema, default: false},
+	// 	outlet: {type: Boolean, default: false}
+	// });
+
+	// let Cafe = mongoose.model('Cafe', cafeSchema);
+	// let Wifi = mongoose.model('Wifi', wifiSchema);
+
+	// let addWifi = function(availability, name, password, speed) {
+	// 	let wifi = new Wifi({
+	// 		availability: availability,
+	// 		name: name, //req.params.name,
+	// 		password: password,
+	// 		speed: speed
+	// 	});
+
+	// 	return wifi;
+	// };
+
 // JSON
 	// Attribute types:
 		String: "t"
@@ -166,4 +277,68 @@
 		Array: []
 		Boolean: true, false
 		Value
-		null 
+		null
+
+	let products = req.body['products'];
+	let products = file.products;
+
+	let inventory_count = parseInt(product.inventory_count);
+	// Access using: products[req.params.product];
+
+	{
+		"products": {
+			"cheese": 
+			{
+				"title": "cheese",
+				"price": "3.00",
+				"inventory_count": "27"
+			},
+			"banana":
+			{
+				"title": "banana",
+				"price": "0.56",
+				"inventory_count": "34"
+			},
+			"car": 
+			{
+				"title": "car",
+				"price": "32500",
+				"inventory_count": "12"
+			},
+			"potato":
+			{
+				"title": "potato",
+				"price": "123",
+				"inventory_count": "0"
+			}
+		}
+	}
+
+	
+	let inventory_count = parseInt(product[0].inventory_count);
+	// or products.filter(item => item.title === req.params.product);
+
+	{
+		"products": [
+			{
+				"title": "cheese",
+				"price": "3.00",
+				"inventory_count": "27"
+			},
+			{
+				"title": "banana",
+				"price": "0.56",
+				"inventory_count": "34"
+			},
+			{
+				"title": "car",
+				"price": "32500",
+				"inventory_count": "12"
+			},
+			{
+				"title": "potato",
+				"price": "123",
+				"inventory_count": "0"
+			}
+		]
+	}

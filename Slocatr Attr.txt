@@ -3,13 +3,14 @@
 	[] Cafe: 'boolean'
 	[] Other: 'boolean' (park)
 - Address: 'text'
-[] Wifi: 'class'
+[] Wifi: 
 	[] availability: 'boolean'
 	- Wifi name: 'text'
 	- Wifi password: 'text'
 	[] Speed: 'text' (fast or not)
 [] Outlet: 'boolean' (outlet exists or not)
-[] Bathroom: 'boolean' (bathroom exists or not)
+[] Bathroom: 
+	[] Available: boolean; bathroom exists or not
 	[] Locked: 'boolean'; if true (1):
 		[] Key: 'boolean'
 		[] Code: 'text'
