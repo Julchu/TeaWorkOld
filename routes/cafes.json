@@ -83,6 +83,34 @@
 				"evening": true
 			},
 			"climate": "Stuffy"
+		},
+		{	
+			"name": "Dagu",
+			"type": "Restaurant",
+			"wifi": 
+			{
+				"available": false,
+				"name": "",
+				"password": "",
+				"fast": false
+			},
+			"outlet": false,
+			"bathroom": 
+			{
+				"available": true,
+				"locked": false,
+				"key": false,
+				"code": "",
+				"clean": true
+			},
+			"clean": true,
+			"busy": 
+			{
+				"morning": false,
+				"afternoon": false,
+				"evening": true
+			},
+			"climate": "Ventilated"
 		}
 	]
 }
