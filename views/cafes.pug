@@ -1,5 +1,34 @@
 extends layout
 
 block content
-  h1= title
-  p List of cafes
+	h1 #{title}
+
+	p List of cafes 
+
+	// form(action="/add_movie", method="POST")
+	// p
+	// 	| title: 
+	// 	input(type="text", name="title", value="")
+	// 	|					year: 
+	// 	input(type="text", name="year", value="")
+	// 	|					imdb: 
+	// 	input(type="text", name="imdb", value="")
+	// input(type="submit", value="Submit")
+
+	// /cafes/#{title}
+	form(method="POST" action="/cafes/"/* + title*/) 
+		div Name: 
+			input#name(type="text", placeholder="Cafe Name")
+		div Type: 
+			input#Type(type="dropdown")
+		div Wifi: 
+			input(
+				type="checkbox"
+				name="Wifi Available"
+				)
+		div
+			button() Submit
+
+
+
+			// input#name(type="text", placeholder="Cafe Name")

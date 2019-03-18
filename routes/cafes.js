@@ -48,8 +48,11 @@ let cafeSchema = new mongoose.Schema({
 
 let Cafe = mongoose.model("Cafe", cafeSchema, "Cafes");
 
+// TODO: cafes.pug action '/' + place
+
 router.post('/', async function(req, res, next) {
-	let cafes = req.body;
+	// let cafes = req.body;
+	let cafes = file.cafes[0];
 	let cafe = new Cafe({
 		name: cafes.name, //req.params.name,
 		type: cafes.type,
@@ -61,42 +64,61 @@ router.post('/', async function(req, res, next) {
 		climate: cafes.climate
 	});
 	await cafe.save();
-	await res.json(cafe);
+	res.render("cafes", {title: cafes.name});
 });
 
 router.get('/', async function(req, res, next) {
 	let cafeList = {"cafes": []};
 	let cafes = file.cafes;
-	// console.log(cafes[0]);
+	
+	let cafeFlag = await req.query["cafe"];
+	let restaurantFlag = req.query["restaurant"];
+	let otherFlag = req.query["other"];
 
-	let cafeFlag = req.query["cafes"];
-	console.log(cafeFlag);
-	for (let i = 0; i < cafes.length; i++) {
-		if (cafeFlag) {
-			if (cafes[i].type === "Cafe") {
-				cafeList.cafes.push(cafes[i]);
+	if (cafeFlag || restaurantFlag || otherFlag) {
+		for (let i = 0; i < cafes.length; i++) {
+			if (cafeFlag) {
+				if (cafes[i].type === "Cafe") {
+					await cafeList.cafes.push(cafes[i]);
+				}
+			} else if (restaurantFlag) {
+				if (cafes[i].type === "Restaurant") {
+					await cafeList.cafes.push(cafes[i]);
+				}
+			} else if (otherFlag) {
+				if (cafes[i].type === "Other") {
+					await cafeList.cafes.push(cafes[i]);
+				}
+			} else {
+				await cafeList.cafes.push(cafes[i]);
 			}
-		} else {
-			cafeList.cafes.push(cafes[i]);
 		}
+
+		// let available = req.query["available"];
+
+		// for (let i = 0; i < cafes.length; i++) {
+		// 	if (available) {
+		// 		if (products[i].inventory_count > 0) {
+		// 			productList.products.push(products[i]);
+		// 		}
+		// 	} else {
+		// 		productList.products.push(products[i]);
+		// 	}
+		// }
+		// productList.products.sort();
+		await res.render('cafes', {title: cafeList.cafes[0].name, cafeWifi: cafeList.cafes[0].wifi});
+	} else {
+		res.render("cafes", {title: "Cafes"})
 	}
-	// let available = req.query["available"];
-
-	// for (let i = 0; i < cafes.length; i++) {
-	// 	if (available) {
-	// 		if (products[i].inventory_count > 0) {
-	// 			productList.products.push(products[i]);
-	// 		}
-	// 	} else {
-	// 		productList.products.push(products[i]);
-	// 	}
-	// }
-	// productList.products.sort();
-
-	res.json(cafeList);
 });
 
-/*uter.get('/:product', async function(req, res, next) {
+router.get('/:cafes', async function(req, res, next) {
+	res.render('cafes', {title: req.params.cafes});
+});
+
+module.exports = router;
+
+/*router.get('/:product', async function(req, res, next) {
 	let products = file.products;
 	let product = products.filter(item => item.title === req.params.product);
 	res.json(product);
@@ -120,8 +142,3 @@ router.patch('/:product', async function (req, res, next) {
 	}
 }); */
 
-router.get('/', async function(req, res, next) {
-	res.render('cafes', { title: "Cafes" });
-});
-
-module.exports = router;

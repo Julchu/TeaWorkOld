@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/me', function(req, res, next) {
-	res.render('me', { title: "Julian", about: "About Julian" });
+	res.render('about', { title: "Julian", about: "About Julian" });
 });
 
 module.exports = router;
