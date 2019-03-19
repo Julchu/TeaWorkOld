@@ -3,32 +3,27 @@ extends layout
 block content
 	h1 #{title}
 
-	p List of cafes 
+	p List of cafes
 
-	// form(action="/add_movie", method="POST")
-	// p
-	// 	| title: 
-	// 	input(type="text", name="title", value="")
-	// 	|					year: 
-	// 	input(type="text", name="year", value="")
-	// 	|					imdb: 
-	// 	input(type="text", name="imdb", value="")
-	// input(type="submit", value="Submit")
-
-	// /cafes/#{title}
 	form(method="POST" action="/cafes/"/* + title*/) 
 		div Name: 
-			input#name(type="text", placeholder="Cafe Name")
+			input(name="Name", type="text", placeholder=" Cafe Name")
 		div Type: 
-			input#Type(type="dropdown")
+			select(name="Type")
+				var cafeTypes = #{cafeTypes}
+				each type in cafeTypes
+					option(type=type)=type
 		div Wifi: 
-			input(
-				type="checkbox"
-				name="Wifi Available"
-				)
+			input(name="Wifi", type="checkbox")
 		div
-			button() Submit
+			button(name="Submit") Submit
 
 
 
+			// option(type=cafeType) cafeType
 			// input#name(type="text", placeholder="Cafe Name")
+
+			// option(type="Cafe") Cafe
+			// option(type="Restaurant") Restaurant
+			// option(type="Other") Other
+			// option(type=cafeType) cafeType

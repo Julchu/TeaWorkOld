@@ -5,14 +5,14 @@ let mongoose = require('mongoose');
 let router = express.Router();
 let file = require('./cafes.json');
 
-// const uri = "mongodb://heroku_v670xkbh:km62gbjl3mf08ajvul3a7q49c8@ds051524.mlab.com:51524/heroku_v670xkbh"
-const uri = process.env.MONGODB_URI
+const uri = "mongodb://heroku_v670xkbh:km62gbjl3mf08ajvul3a7q49c8@ds051524.mlab.com:51524/heroku_v670xkbh"
+// const uri = process.env.MONGODB_URI
 
 mongoose.connect(uri, {useNewUrlParser: true});
 
 // Describing schema (class attributes) cafeSchema for Cafe class
 let cafeSchema = new mongoose.Schema({
-	name: {type: String, default: ""},
+	name: {type: String, default: "Name"},
 	type: {
 		type: String,
 		default: "Cafe",
@@ -50,23 +50,6 @@ let Cafe = mongoose.model("Cafe", cafeSchema, "Cafes");
 
 // TODO: cafes.pug action '/' + place
 
-router.post('/', async function(req, res, next) {
-	// let cafes = req.body;
-	let cafes = file.cafes[0];
-	let cafe = new Cafe({
-		name: cafes.name, //req.params.name,
-		type: cafes.type,
-		wifi: cafes.wifi,
-		outlet: cafes.outlet,
-		bathroom: cafes.bathroom,
-		clean: cafes.clean,
-		busy: cafes.busy,
-		climate: cafes.climate
-	});
-	await cafe.save();
-	res.render("cafes", {title: cafes.name});
-});
-
 router.get('/', async function(req, res, next) {
 	let cafeList = {"cafes": []};
 	let cafes = file.cafes;
@@ -93,27 +76,41 @@ router.get('/', async function(req, res, next) {
 				await cafeList.cafes.push(cafes[i]);
 			}
 		}
-
-		// let available = req.query["available"];
-
-		// for (let i = 0; i < cafes.length; i++) {
-		// 	if (available) {
-		// 		if (products[i].inventory_count > 0) {
-		// 			productList.products.push(products[i]);
-		// 		}
-		// 	} else {
-		// 		productList.products.push(products[i]);
-		// 	}
-		// }
-		// productList.products.sort();
-		await res.render('cafes', {title: cafeList.cafes[0].name, cafeWifi: cafeList.cafes[0].wifi});
+		await res.render('cafes', {
+			title: cafeList.cafes[0].name, 
+			cafeWifi: cafeList.cafes[0].wifi
+		});
 	} else {
-		res.render("cafes", {title: "Cafes"})
+		await res.render("cafes", {
+			title: "Cafes", 
+			cafeTypes: cafeSchema.paths.type.enumValues
+		});
 	}
 });
 
 router.get('/:cafes', async function(req, res, next) {
 	res.render('cafes', {title: req.params.cafes});
+});
+
+router.post('/', async function(req, res, next) {
+	let cafes = file.cafes[0];
+	let cafe = new Cafe({
+		name: req.body.Name || "Cafe",
+		type: req.body.Type,
+		wifi: {
+			available: req.body.Wifi == "on"
+		},
+		outlet: cafes.outlet,
+		bathroom: cafes.bathroom,
+		clean: cafes.clean,
+		busy: cafes.busy,
+		climate: cafes.climate
+	});
+	await cafe.save();
+	res.render("cafes", {
+		title: cafe.name, 
+		cafeTypes: cafeSchema.paths.type.enumValues
+	});
 });
 
 module.exports = router;
