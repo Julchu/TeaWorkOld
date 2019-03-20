@@ -6,9 +6,9 @@ TeaWork is a web and mobile app to find good workspaces at cafes, restaurants, a
 ## Features
 Signing in (using Google/Facebook accounts) is required as a measure of blocking duplicate/fake submissions
 ```
-Allows users to saving personal preferences and bookmarks
-Personal preferences and submissions are used to describe each location
-Uses GMaps api to find cafes
+- Allows users to saving personal preferences and bookmarks
+- Personal preferences and submissions are used to describe each location
+- Uses GMaps api to find cafes
 ```
 
 ## Format of Cafe objects
@@ -49,8 +49,8 @@ Uses GMaps api to find cafes
 
 ## // TODO: 
 ```
-Finish adding inputs appropriate to required cafe attributes to GUI
-Figure out how to run local script from HTML side (troubles with Pug searching directory from URL)
-Add parking as filter
-Fix Wi-Fi speed filter (Boolean, not String, therefore dropdown/checkbox ands not textbox)
+- Finish adding inputs appropriate to required cafe attributes to GUI
+- Figure out how to run local script from HTML side (troubles with Pug searching directory from URL)
+- Add parking as filter
+- Fix Wi-Fi speed filter (Boolean, not String, therefore dropdown/checkbox ands not textbox)
 ```
