@@ -5,8 +5,8 @@ let mongoose = require('mongoose');
 let router = express.Router();
 let file = require('./cafes.json');
 
-const uri = "mongodb://heroku_v670xkbh:km62gbjl3mf08ajvul3a7q49c8@ds051524.mlab.com:51524/heroku_v670xkbh"
-// const uri = process.env.MONGODB_URI
+// const uri = "mongodb://heroku_v670xkbh:km62gbjl3mf08ajvul3a7q49c8@ds051524.mlab.com:51524/heroku_v670xkbh"
+const uri = process.env.MONGODB_URI
 
 mongoose.connect(uri, {useNewUrlParser: true});
 
