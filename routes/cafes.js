@@ -5,8 +5,8 @@ let mongoose = require('mongoose');
 let router = express.Router();
 let file = require('./cafes.json');
 
-// const uri = "mongodb://heroku_v670xkbh:km62gbjl3mf08ajvul3a7q49c8@ds051524.mlab.com:51524/heroku_v670xkbh"
-const uri = process.env.MONGODB_URI
+const uri = "mongodb://heroku_v670xkbh:km62gbjl3mf08ajvul3a7q49c8@ds051524.mlab.com:51524/heroku_v670xkbh"
+// const uri = process.env.MONGODB_URI
 
 mongoose.connect(uri, {useNewUrlParser: true});
 
@@ -39,10 +39,6 @@ let cafeSchema = new mongoose.Schema({
 		morning: {type: Boolean, default: false},
 		afternoon: {type: Boolean, default: false},
 		evening: {type: Boolean, default: false}
-	},
-	climate: {
-		type: String, 
-		enum: ["AC", "Heated", "Ventilated", "Stuffy"]
 	}
 });
 
@@ -54,7 +50,7 @@ router.get('/', async function(req, res, next) {
 	let cafeList = {"cafes": []};
 	let cafes = file.cafes;
 	
-	let cafeFlag = await req.query["cafe"];
+	let cafeFlag = req.query["cafe"];
 	let restaurantFlag = req.query["restaurant"];
 	let otherFlag = req.query["other"];
 
@@ -62,80 +58,76 @@ router.get('/', async function(req, res, next) {
 		for (let i = 0; i < cafes.length; i++) {
 			if (cafeFlag) {
 				if (cafes[i].type === "Cafe") {
-					await cafeList.cafes.push(cafes[i]);
+					cafeList.cafes.push(cafes[i]);
 				}
 			} else if (restaurantFlag) {
 				if (cafes[i].type === "Restaurant") {
-					await cafeList.cafes.push(cafes[i]);
+					cafeList.cafes.push(cafes[i]);
 				}
 			} else if (otherFlag) {
 				if (cafes[i].type === "Other") {
-					await cafeList.cafes.push(cafes[i]);
+					cafeList.cafes.push(cafes[i]);
 				}
 			} else {
-				await cafeList.cafes.push(cafes[i]);
+				cafeList.cafes.push(cafes[i]);
 			}
 		}
-		await res.render('cafes', {
-			title: cafeList.cafes[0].name, 
+		res.render('cafes', {
+			title: cafeList.cafes[0].name,
 			cafeWifi: cafeList.cafes[0].wifi
 		});
 	} else {
-		await res.render("cafes", {
-			title: "Cafes", 
+		res.render("cafes", {
+			title: "Cafes",
 			cafeTypes: cafeSchema.paths.type.enumValues
 		});
 	}
 });
 
 router.get('/:cafes', async function(req, res, next) {
-	res.render('cafes', {title: req.params.cafes});
-});
-
-router.post('/', async function(req, res, next) {
-	let cafes = file.cafes[0];
-	let cafe = new Cafe({
-		name: req.body.Name || "Cafe",
-		type: req.body.Type,
-		wifi: {
-			available: req.body.Wifi == "on"
-		},
-		outlet: cafes.outlet,
-		bathroom: cafes.bathroom,
-		clean: cafes.clean,
-		busy: cafes.busy,
-		climate: cafes.climate
-	});
-	await cafe.save();
-	res.render("cafes", {
-		title: cafe.name, 
+	res.render('cafes', {
+		title: req.params.cafes,
 		cafeTypes: cafeSchema.paths.type.enumValues
 	});
 });
 
-module.exports = router;
+router.post('/', async function(req, res, next) {
+	let wifiAvailable, wifiName, wifiPassword, wifiSpeed;
+	if (req.body.WifiAvailable == "on") {
+		wifiAvailable = true;
+		wifiName = req.body.WifiName;
+		wifiPassword = req.body.WifiPassword;
+		wifiSpeed = req.body.WifiSpeed;
+	}
 
-/*router.get('/:product', async function(req, res, next) {
-	let products = file.products;
-	let product = products.filter(item => item.title === req.params.product);
-	res.json(product);
+	let cafe = new Cafe({
+		name: req.body.Name || "Cafe",
+		type: req.body.Type,
+		wifi: {
+			available: wifiFlag,
+			name: wifiName,
+			password: wifiPassword,
+			speed: wifiSpeed
+		},
+		outlet: req.body.Outlet,
+		bathroom: req.body.Bathroom,
+		clean: req.body.Clean,
+		busy: req.body.Busy
+	});
+	await cafe.save();
+	await res.redirect("/cafes/" + cafe.name);
 });
 
-router.patch('/:product', async function (req, res, next) {
-	let products = file.products;
-	let product = products.filter(item => item.title === req.params.product);
-	let inventory_count = parseInt(product[0].inventory_count);
-	
-	if (inventory_count > 0) {
-		product[0].inventory_count -= 1;
-		res.json(product);
-	} else {
-		res.statusCode = 500;
-		res.json({
-			error: {
-				message: "Not enough inventory"
-			}
-		});
-	}
-}); */
+module.exports = router;
 
+// if (inventory_count > 0) {
+// 	product[0].inventory_count -= 1;
+// 	res.json(product);
+// } else {
+// 	res.statusCode = 500;
+// 	res.json({
+// 		error: {
+// 			message: "Not enough inventory"
+// 		}
+// 	});
+// }
