@@ -1,10 +1,18 @@
-- TeaWork: a place for tea, work, and teamwork
-- Mobile/web app to find good workspace restaurants/cafes/spots + remember personal preferences
-	- Sign in: required for blocking duplicates (Google/Facebook)
-		- Required for saving personal preferences
-	- Personal preferences used to conglomerate opinions of each location
-	- Uses GMaps api to find cafes nearby
+# TeaWork: a place for tea, work, and teamwork
 
+## About 
+TeaWork is a web and mobile app to find good workspaces at cafes, restaurants, and other spots (parks, schools), and help remember personal preferences
+
+## Features
+Signing in (using Google/Facebook accounts) is required as a measure of blocking duplicate/fake submissions
+```
+- Allows users to saving personal preferences and bookmarks
+- Personal preferences and submissions are used to describe each location
+- Uses GMaps api to find cafes
+```
+
+## Format of Cafe objects
+```
 {
 	cafes
 	{
@@ -17,7 +25,6 @@
 		wifi: {
 			available: {type: Boolean, default: false},
 			name: {type: String, default: ""},
-			
 			// TODO: encrypt password
 			password: {type: String, default: ""},
 			fast: {type: Boolean, default: false}
@@ -38,5 +45,12 @@
 		}
 	}
 }
+```
 
-[My TODO list](/TODO.md)
+## // TODO: 
+```
+Finish adding inputs appropriate to required cafe attributes to GUI
+Figure out how to run local script from HTML side (troubles with Pug searching directory from URL)
+Add parking as filter
+Fix Wi-Fi speed filter (Boolean, not String, therefore dropdown/checkbox ands not textbox)
+```
