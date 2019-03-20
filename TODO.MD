@@ -1,2 +1,0 @@
-- 1. Finish adding inputs appropriate to required cafe attributes to GUI
-- 2. Figure out how to run local script from HTML side (troubles with Pug searching directory from URL)
