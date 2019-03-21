@@ -1,6 +1,6 @@
 "use strict";
 
-function showPassword = {
+function showPassword() {
     if (document.getElementById('viewPassword').checked) {
         document.getElementById('WifiPassword').type="text";
     } else {

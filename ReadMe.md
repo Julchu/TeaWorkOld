@@ -42,7 +42,8 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 			morning: {type: Boolean, default: false},
 			afternoon: {type: Boolean, default: false},
 			evening: {type: Boolean, default: false}
-		}
+		},
+		parking: {type: Boolean, default: false}
 	}
 }
 ```
@@ -51,6 +52,4 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 ```
 - Finish adding inputs appropriate to required cafe attributes to GUI
 - Figure out how to run local script from HTML side (troubles with Pug searching directory from URL)
-- Add parking as filter
-- Fix Wi-Fi speed filter (Boolean, not String, therefore dropdown/checkbox ands not textbox)
 ```

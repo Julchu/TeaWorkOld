@@ -1,41 +1,53 @@
 extends layout
 
+block scripts
+	script(src='/javascripts/script.js')
+
+
 block content
 	h1 #{title}
 
 	form(method="POST" action='/cafes/')
-		div#Name Name:
-			input(name="Name", type="text", placeholder=" Cafe Name")
-		div#Type Type:
-			select(name="Type")
-				var cafeTypes = #{cafeTypes}
-				each type in cafeTypes
-					option(type=type)=type
-		div#Wifi Wifi: 
-			input(name="WifiAvailable", type="checkbox")
-			|
-			|
-			|
-			input(name="WifiName", type="text",  placeholder=" Network Name")
-			|
-			|
-			|
-			input(name="WifiPassword", type="password",  placeholder=" Password", id="WifiPassword")
-			|
-			|
-			|
-			input#viewPassword(type="checkbox")
-			|
-			|
-			|
-			input(name="WifiSpeed", type="text", placeholder=" Speed")
-			|
-			|
-			|
+		div#Name 
+			p Name:
+				input(name="Name", type="text", placeholder=" Cafe Name")
+		div#Type
+			p Type:
+				select(name="Type")
+					var cafeTypes = #{cafeTypes}
+					each type in cafeTypes
+						option(type=type)=type
+		div#Wifi
+			p Is there free Wi-Fi?
+				input(name="WifiAvailable", type="checkbox")
+			p Network name:
+				input(name="WifiName", type="text",  placeholder=" Network Name")
+			p Password:
+				input(name="WifiPassword", type="text",  placeholder=" Password", id="WifiPassword")
+			p Is the Wi-Fi fast?
+				input(name="WifiSpeed", type="checkbox")
+		div#Outlet Outlet: 
+			input(name="Outlet", type="checkbox")
+		div#Bathroom
+			p Are there bathrooms?
+				input(name="BathroomAvailable", type="checkbox")
+			p Are the bathrooms locked?
+				input(name="BathroomLocked", type="checkbox")
+			p If so, is it locked by key?
+				input(name="bathroomKey", type="checkbox")
+			p If not, what is the code?
+				input(name="bathroomCode", type="textbox")
+			p Do they have clean bathrooms?
+				input(name="bathroomClean", type="checkbox")
+		div#Clean
+
+		div#Busy
+		
 		div#Save
 			button(name="Save") Save
 			button(name="Reset", type="reset") Reset
 
-
+			// 	p Show Password:
+			//		input#viewPassword(type="checkbox", onclick="showPassword()")
 			// Set checkbox to submit on tickmark: onChange="this.form.submit()"
-			// viewPassword attribute onclick="showPassword()
+			// view Password attribute onclick="showPassword()

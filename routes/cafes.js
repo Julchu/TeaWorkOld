@@ -5,8 +5,12 @@ let mongoose = require('mongoose');
 let router = express.Router();
 let file = require('./cafes.json');
 
-// const uri = "mongodb://heroku_v670xkbh:km62gbjl3mf08ajvul3a7q49c8@ds051524.mlab.com:51524/heroku_v670xkbh"
-const uri = process.env.MONGODB_URI
+let uri = "";
+if (typeof process.env.MONGODB_URI == 'undefined') {
+	uri = "mongodb://heroku_v670xkbh:km62gbjl3mf08ajvul3a7q49c8@ds051524.mlab.com:51524/heroku_v670xkbh";
+} else {
+	uri = process.env.MONGODB_URI;
+}
 
 mongoose.connect(uri, {useNewUrlParser: true});
 
@@ -39,12 +43,11 @@ let cafeSchema = new mongoose.Schema({
 		morning: {type: Boolean, default: false},
 		afternoon: {type: Boolean, default: false},
 		evening: {type: Boolean, default: false}
-	}
+	},
+	parking: {type: Boolean, default: false}
 });
 
 let Cafe = mongoose.model("Cafe", cafeSchema, "Cafes");
-
-// TODO: cafes.pug action '/' + place
 
 router.get('/', async function(req, res, next) {
 	let cafeList = {"cafes": []};
@@ -85,13 +88,14 @@ router.get('/', async function(req, res, next) {
 });
 
 router.get('/:cafes', async function(req, res, next) {
-	res.render('cafes', {
+	res.render('cafe', {
 		title: req.params.cafes,
 		cafeTypes: cafeSchema.paths.type.enumValues
 	});
 });
 
 router.post('/', async function(req, res, next) {
+	// Wi-fi
 	let wifiAvailable, wifiName, wifiPassword, wifiSpeed;
 	if (req.body.WifiAvailable == "on") {
 		wifiAvailable = true;
@@ -100,19 +104,40 @@ router.post('/', async function(req, res, next) {
 		wifiSpeed = req.body.WifiSpeed;
 	}
 
+	// Bathroom
+	let bathroomAvailable, bathroomLocked, bathroomKey, bathroomCode, bathroomClean;
+	if (req.body.BathroomAvailable == "on") {
+		if (req.body.BathroomLocked == "on") {
+			if (req.body.BathroomKey == "on") {
+				bathroomKey = true;
+			} else {
+				bathroomCode = req.body.BathroomCode;
+			}
+		}
+		bathroomClean = req.body.BathroomClean == 'on';
+	}
+
+	// Creating the Cafe object
 	let cafe = new Cafe({
-		name: req.body.Name || "Cafe",
+		name: req.body.Name || "Cafes",
 		type: req.body.Type,
 		wifi: {
-			available: wifiFlag,
+			available: wifiAvailable,
 			name: wifiName,
 			password: wifiPassword,
 			speed: wifiSpeed
 		},
-		outlet: req.body.Outlet,
-		bathroom: req.body.Bathroom,
-		clean: req.body.Clean,
-		busy: req.body.Busy
+		outlet: req.body.Outlet == "on",
+		bathroom: {
+			available: bathroomAvailable,
+			locked: bathroomLocked,
+			key: bathroomKey,
+			code: bathroomCode,
+			clean: bathroomClean
+		},
+		clean: req.body.Clean == "on",
+		busy: req.body.Busy,
+		parking: req.body.Parking == "on"
 	});
 	await cafe.save();
 	await res.redirect("/cafes/" + cafe.name);
