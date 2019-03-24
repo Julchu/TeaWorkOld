@@ -50,6 +50,9 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 
 ## // TODO: 
 ```
-- Finish adding inputs appropriate to required cafe attributes to GUI
-- Figure out how to run local script from HTML side (troubles with Pug searching directory from URL)
+- Implement update/overwrite/merge functionality
+- Implement functionality to search by filter
+- Bootstrap
+- jQuery, React, React Native
+- User sessions
 ```

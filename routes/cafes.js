@@ -87,11 +87,30 @@ router.get('/', async function(req, res, next) {
 	}
 });
 
+// Basic search function
 router.get('/:cafes', async function(req, res, next) {
+	let title, content;
+	let cafe = await Cafe.findOne({name: req.params.cafes}); //, type: "Restaurant"}
+	if (cafe == "") {
+		title = "Cafe Not Found";
+		content = "Search for another cafe";
+	} else {
+		title = req.params.cafes;
+		content = cafe;
+	}
 	res.render('cafe', {
-		title: req.params.cafes,
-		cafeTypes: cafeSchema.paths.type.enumValues
+		title: title,
+		content: content
 	});
+});
+
+router.patch("/:cafes", async function(req, res, next) {
+	// If conditions: 
+	
+
+
+	await cafe.save();
+	res.redirect("/cafes/" + cafe.name);
 });
 
 router.post('/', async function(req, res, next) {
@@ -140,7 +159,7 @@ router.post('/', async function(req, res, next) {
 		parking: req.body.Parking == "on"
 	});
 	await cafe.save();
-	await res.redirect("/cafes/" + cafe.name);
+	res.redirect("/cafes/" + cafe.name);
 });
 
 module.exports = router;
