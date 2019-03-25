@@ -105,7 +105,7 @@ router.get('/:cafes', async function(req, res, next) {
 });
 
 router.patch("/:cafes", async function(req, res, next) {
-	// If conditions: 
+	
 	
 
 
@@ -116,37 +116,37 @@ router.patch("/:cafes", async function(req, res, next) {
 router.post('/', async function(req, res, next) {
 	// Wi-fi
 	let wifiAvailable, wifiName, wifiPassword, wifiSpeed;
-	if (req.body.WifiAvailable == "on") {
+	if (req.body.wifiAvailable == "on") {
 		wifiAvailable = true;
-		wifiName = req.body.WifiName;
-		wifiPassword = req.body.WifiPassword;
-		wifiSpeed = req.body.WifiSpeed;
+		wifiName = req.body.wifiName;
+		wifiPassword = req.body.wifiPassword;
+		wifiSpeed = req.body.wifiSpeed;
 	}
 
 	// Bathroom
 	let bathroomAvailable, bathroomLocked, bathroomKey, bathroomCode, bathroomClean;
-	if (req.body.BathroomAvailable == "on") {
-		if (req.body.BathroomLocked == "on") {
-			if (req.body.BathroomKey == "on") {
+	if (req.body.bathroomAvailable == "on") {
+		if (req.body.bathroomLocked == "on") {
+			if (req.body.bathroomKey == "on") {
 				bathroomKey = true;
 			} else {
-				bathroomCode = req.body.BathroomCode;
+				bathroomCode = req.body.bathroomCode;
 			}
 		}
-		bathroomClean = req.body.BathroomClean == 'on';
+		bathroomClean = req.body.bathroomClean == 'on';
 	}
 
 	// Creating the Cafe object
 	let cafe = new Cafe({
-		name: req.body.Name || "Cafes",
-		type: req.body.Type,
+		name: req.body.name || "Cafes",
+		type: req.body.type,
 		wifi: {
 			available: wifiAvailable,
 			name: wifiName,
 			password: wifiPassword,
 			speed: wifiSpeed
 		},
-		outlet: req.body.Outlet == "on",
+		outlet: req.body.outlet == "on",
 		bathroom: {
 			available: bathroomAvailable,
 			locked: bathroomLocked,
@@ -154,9 +154,9 @@ router.post('/', async function(req, res, next) {
 			code: bathroomCode,
 			clean: bathroomClean
 		},
-		clean: req.body.Clean == "on",
-		busy: req.body.Busy,
-		parking: req.body.Parking == "on"
+		clean: req.body.clean == "on",
+		busy: req.body.busy,
+		parking: req.body.parking == "on"
 	});
 	await cafe.save();
 	res.redirect("/cafes/" + cafe.name);
