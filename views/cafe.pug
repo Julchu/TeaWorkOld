@@ -2,11 +2,18 @@ extends layout
 
 block content
 	h1 #{title}
-	h2 #{content.wifi}
+	h2 
+		if content
+			content.wifi
+		else
+			content
 
 	div#Information
 		p#Name 
-			#{content.wifi}
+			if content
+				content.wifi
+			else 
+				content
 		p#Type
 		p#Wifi
 

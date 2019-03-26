@@ -87,16 +87,23 @@ router.get('/', async function(req, res, next) {
 	}
 });
 
+router.get("/submit", async function(req, res, next) {
+	res.render("submit", {
+		title: "Cafes", 
+		cafeTypes: cafeSchema.paths.type.enumValues
+	})
+});
+
 // Basic search function
 router.get('/:cafes', async function(req, res, next) {
 	let title, content;
 	let cafe = await Cafe.findOne({name: req.params.cafes}); //, type: "Restaurant"}
-	if (cafe == "") {
-		title = "Cafe Not Found";
-		content = "Search for another cafe";
-	} else {
+	if (cafe) {
 		title = req.params.cafes;
 		content = cafe;
+	} else {
+		title = "Cafe Not Found";
+		content = "Search for another cafe";
 	}
 	res.render('cafe', {
 		title: title,
@@ -105,10 +112,6 @@ router.get('/:cafes', async function(req, res, next) {
 });
 
 router.patch("/:cafes", async function(req, res, next) {
-	
-	
-
-
 	await cafe.save();
 	res.redirect("/cafes/" + cafe.name);
 });

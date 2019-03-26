@@ -2,9 +2,9 @@
 
 function showPassword() {
     if (document.getElementById('viewPassword').checked) {
-        document.getElementById('WifiPassword').type="text";
+        document.getElementById('wifiPassword').type="text";
     } else {
-        document.getElementById('WifiPassword').type="password";
+        document.getElementById('wifiPassword').type="password";
     }
 }
 

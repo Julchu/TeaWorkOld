@@ -6,58 +6,14 @@ block scripts
 
 block content
 	h1 #{title}
-
+ 
 	div#Container(class="container")
-		form(method="POST" action='/cafes/')
-			div#Name
-				p Name:
-					input(name="name", type="text", placeholder=" Cafe Name")
-			div#Type
-				p Type:
-					select(name="type")
-						var cafeTypes = #{cafeTypes}
-						each type in cafeTypes
-							option(type=type)=type
-			div#Wifi
-				p Is there free Wi-Fi?
-					input(name="wifiAvailable", type="checkbox")
-				p Network name:
-					input(name="wifiName", type="text",  placeholder=" Network Name")
-				p Password:
-					input(name="wifiPassword", type="text",  placeholder=" Password", id="WifiPassword")
-				p Is the Wi-Fi fast?
-					input(name="wifiSpeed", type="checkbox")
-			div#Outlet Outlet: 
-				input(name="outlet", type="checkbox")
-			div#Bathroom
-				p Are there bathrooms?
-					input(name="bathroomAvailable", type="checkbox")
-				p Are the bathrooms locked?
-					input(name="bathroomLocked", type="checkbox")
-				p If so, is it locked by key?
-					input(name="bathroomKey", type="checkbox")
-				p If not, what is the code?
-					input(name="bathroomCode", type="textbox")
-				p Do they have clean bathrooms?
-					input(name="bathroomClean", type="checkbox")
-			div#Clean
-				p Is the place clean?
-					input(name="clean", type="checkbox")
-			div#Busy
-				p When is the place busy?
-				p Morning:
-					input(name="busyMorning", type="checkbox")
-				p Noon:
-					input(name="busyNoon", type="checkbox")
-				p Night: 
-					input(name="busyNight", type="checkbox")
-			div#Parking
-				p Is there free parking nearby?
-					input(name="parking", type="checkbox")
-			
-			div#Save
-				button(name="save") Save
-				button(name="reset", type="reset") Reset
+		div(class="row")
+			div(class="col1") One of three columns
+			div(class="col2") One of three columns
+			div(class="col3") One of three columns
+
+	block submit
 
 //- p Show Password:
 //- input#viewPassword(type="checkbox", onclick="showPassword()")
