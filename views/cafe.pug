@@ -1,19 +1,24 @@
-extends layout
+extends cafes
+
+block active
+	-var selected = 'Cafe';
 
 block content
-	h1 #{title}
+	.jumbotron.text-center
+		h1 #{title}
+		p #{about}
 	h2 
 		if content
-			content.wifi
+			#{content.wifi}
 		else
-			content
+			#{content}
 
 	div#Information
 		p#Name 
 			if content
-				content.wifi
-			else 
-				content
+				#{content.wifi}
+			else
+				#{content}
 		p#Type
 		p#Wifi
 

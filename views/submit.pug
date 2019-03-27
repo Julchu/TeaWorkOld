@@ -1,9 +1,12 @@
 extends cafes
 
+block active
+	-var selected = 'Submit';
+
 block scripts
 	script(src='/javascripts/script.js')
 
-block submit
+block content
 	form(method="POST" action='/cafes/')
 		div#Name
 			p Name:
@@ -20,11 +23,11 @@ block submit
 			p Network name:
 				input(name="wifiName", type="text",  placeholder=" Network Name")
 			p Password:
-				input#wifiPassword(name="wifiPassword", type="password",  placeholder=" Password")
+				input(name="wifiPassword", type="password",  placeholder=" Password")
 			p Show Password:
-				input#viewPassword(type="checkbox", onclick="showPassword()")
+				input(type="checkbox", onclick="showPassword()")
 			p Is the Wi-Fi fast?
-				input(name="wifiSpeed", type="checkbox")
+				input(name="wifiFast", type="checkbox")
 		div#Outlet Outlet: 
 			input(name="outlet", type="checkbox")
 		div#Bathroom

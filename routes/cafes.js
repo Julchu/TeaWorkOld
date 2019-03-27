@@ -82,6 +82,7 @@ router.get('/', async function(req, res, next) {
 	} else {
 		res.render("cafes", {
 			title: "Cafes",
+			about: "List of cafes",
 			cafeTypes: cafeSchema.paths.type.enumValues
 		});
 	}
@@ -111,6 +112,24 @@ router.get('/:cafes', async function(req, res, next) {
 	});
 });
 
+// Search based on type of place
+router.get('/:type', async function(req, res, next) {
+	let title, content;
+	let cafe = await Cafe.find({type: req.params.type});
+
+	// if (cafe) {
+	// 	title = req.params.cafes;
+	// 	content = cafe;
+	// } else {
+	// 	title = "Cafe Not Found";
+	// 	content = "Search for another cafe";
+	// }
+	// res.render('cafe', {
+	// 	title: title,
+	// 	content: content
+	// });
+});
+
 router.patch("/:cafes", async function(req, res, next) {
 	await cafe.save();
 	res.redirect("/cafes/" + cafe.name);
@@ -118,12 +137,12 @@ router.patch("/:cafes", async function(req, res, next) {
 
 router.post('/', async function(req, res, next) {
 	// Wi-fi
-	let wifiAvailable, wifiName, wifiPassword, wifiSpeed;
+	let wifiAvailable, wifiName, wifiPassword, wifiFast;
 	if (req.body.wifiAvailable == "on") {
 		wifiAvailable = true;
 		wifiName = req.body.wifiName;
 		wifiPassword = req.body.wifiPassword;
-		wifiSpeed = req.body.wifiSpeed;
+		wifiFast = req.body.wifiFast == "on";
 	}
 
 	// Bathroom
@@ -136,9 +155,8 @@ router.post('/', async function(req, res, next) {
 				bathroomCode = req.body.bathroomCode;
 			}
 		}
-		bathroomClean = req.body.bathroomClean == 'on';
+		bathroomClean = req.body.bathroomClean == "on";
 	}
-
 	// Creating the Cafe object
 	let cafe = new Cafe({
 		name: req.body.name || "Cafes",
@@ -147,7 +165,7 @@ router.post('/', async function(req, res, next) {
 			available: wifiAvailable,
 			name: wifiName,
 			password: wifiPassword,
-			speed: wifiSpeed
+			fast: wifiFast
 		},
 		outlet: req.body.outlet == "on",
 		bathroom: {

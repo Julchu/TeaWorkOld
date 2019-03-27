@@ -46,13 +46,23 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 		parking: {type: Boolean, default: false}
 	}
 }
-```
 
+```
 ## // TODO: 
 ```
-- Implement update/overwrite/merge functionality
-- Implement functionality to search by filter
-- Bootstrap
-- jQuery, React, React Native
+- NodeJS
+-- Implement update/overwrite/merge functionality
+-- Implement functionality to search by filter
 - User sessions
+- Bootstrap
+-- Collapsable nav bar
+- jQuery, React, React Native
 ```
+
+## Links
+- Convert HTML/Pug
+-- https://html2jade.org/
+- Nav bar tutorial
+-- https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp
+- Collapsable nav bar
+-- https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_navbar_collapse

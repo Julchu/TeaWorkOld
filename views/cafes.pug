@@ -1,21 +1,23 @@
 extends layout
 
+block active
+	-var selected = 'Cafes';
+
 block scripts
 	script(src='/javascripts/script.js')
 
-
 block content
-	h1 #{title}
- 
-	div#Container(class="container")
-		div(class="row")
-			div(class="col1") One of three columns
-			div(class="col2") One of three columns
-			div(class="col3") One of three columns
+	.jumbotron.text-center
+		h1 #{title}
+		p #{about}
 
-	block submit
+	#Container(class="container")
+		.row
+			.col-sm-4 One of three columns
+			.col-sm-4 One of three columns
+			.col-sm-4 One of three columns
 
 //- p Show Password:
-//- input#viewPassword(type="checkbox", onclick="showPassword()")
+//- input(id="viewPassword", type="checkbox", onclick="showPassword()")
 //- Set checkbox to submit on tickmark: onChange="this.form.submit()"
 //- view Password attribute onclick="showPassword()

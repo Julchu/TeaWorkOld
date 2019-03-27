@@ -7,5 +7,3 @@ function showPassword() {
         document.getElementById('wifiPassword').type="password";
     }
 }
-
-// HTML side: script(src="../public/javascripts/script.js")
