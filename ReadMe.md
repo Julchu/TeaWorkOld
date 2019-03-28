@@ -53,7 +53,7 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 - NodeJS
 -- Implement update/overwrite/merge functionality
 -- Implement functionality to search by filter
-- User sessions
+- User sessions with PassportJS, password encryption with BCryptJS (not BCrypt)
 - Bootstrap
 -- Collapsable nav bar
 - jQuery, React, React Native
