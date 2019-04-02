@@ -1,9 +1,9 @@
 "use strict";
 
-function showPassword() {
-    if (document.getElementById('viewPassword').checked) {
-        document.getElementById('wifiPassword').type="text";
+function showPassword(checkId, formId) {
+    if (document.getElementById(checkId).checked) {
+        document.getElementById(formId).type="text";
     } else {
-        document.getElementById('wifiPassword').type="password";
+        document.getElementById(formId).type="password";
     }
 }

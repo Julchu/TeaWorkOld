@@ -23,7 +23,7 @@ html
 			//- button(class="navbar-toggler", type="button", data-toggle="collapse", data-target="#collapsibleNavbar")
 			button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsibleNavbar')
 				span.navbar-toggler-icon
-			div.collapse.navbar-collapse#collapsibleNavbar
+			.collapse.navbar-collapse#collapsibleNavbar
 				ul.navbar-nav
 					each link, title in menu
 						if selected === title
@@ -32,5 +32,8 @@ html
 						else
 							li.nav-item
 								a.nav-link(href=link)=title
-				form 
+				form.form-inline(action="/cafes/")
+					input.form-control.mr-sm-2(type="text", placeholder="Search for a cafe")
+					button.btn.btn-light Search
+					//- Replace with filter system
 		block content

@@ -1,0 +1,31 @@
+extend layout
+
+block scripts
+	script(src='/javascripts/script.js')
+
+block content
+	h1 #{title}
+	p Welcome to #{title}
+	.jumbotron.text-center
+		form(method="POST" action='/login')
+			.form-group
+				label(for='email') Email: :
+				input#email.form-control(type='text', name="email", placeholder="Email")
+
+			.form-group
+				label(for='password') Email: :
+				input#password.form-control(type='password', name="password", placeholder="Password")
+
+				p Show Password:
+					input#checkId(type="checkbox", onclick="showPassword(`checkId`, `password`)")
+
+			#Save.btn-group
+				button.btn.btn-primary Login
+				button.btn.btn-light(type="reset") Reset
+
+
+
+		//- h1 #{title}
+		//- p #{about}
+		//- p #{username}
+		//- p #{password}

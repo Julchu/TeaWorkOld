@@ -3,14 +3,13 @@ extends cafes
 block active
 	-var selected = 'Submit';
 
-block scripts
-	script(src='/javascripts/script.js')
-
 block content
-	form(method="POST" action='/cafes/')
-		div#Name
-			p Name:
-				input(name="name", type="text", placeholder=" Cafe Name")
+	
+	form(method="POST", action='/cafes/submit')
+		.form-group
+			label(for='cafeName') Name:
+			input#cafeName.form-control(type='text', name="name", placeholder="Cafe Name")
+
 		div#Type
 			p Type:
 				select(name="type")
@@ -24,8 +23,6 @@ block content
 				input(name="wifiName", type="text",  placeholder=" Network Name")
 			p Password:
 				input(name="wifiPassword", type="password",  placeholder=" Password")
-			p Show Password:
-				input(type="checkbox", onclick="showPassword()")
 			p Is the Wi-Fi fast?
 				input(name="wifiFast", type="checkbox")
 		div#Outlet Outlet: 
@@ -56,6 +53,6 @@ block content
 			p Is there free parking nearby?
 				input(name="parking", type="checkbox")
 
-		div#Save
-			button(name="save") Save
-			button(name="reset", type="reset") Reset
+		div#Save.btn-group
+			button.btn(name="save") Save
+			button.btn(name="reset", type="reset") Reset

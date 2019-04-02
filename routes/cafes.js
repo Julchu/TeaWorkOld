@@ -90,7 +90,7 @@ router.get('/', async function(req, res, next) {
 
 router.get("/submit", async function(req, res, next) {
 	res.render("submit", {
-		title: "Cafes", 
+		title: "New Cafe", 
 		cafeTypes: cafeSchema.paths.type.enumValues
 	})
 });
@@ -98,6 +98,7 @@ router.get("/submit", async function(req, res, next) {
 // Basic search function
 router.get('/:cafes', async function(req, res, next) {
 	let title, content;
+	console.log(req.body)
 	let cafe = await Cafe.findOne({name: req.params.cafes}); //, type: "Restaurant"}
 	if (cafe) {
 		title = req.params.cafes;
@@ -136,7 +137,7 @@ router.patch("/:cafes", async function(req, res, next) {
 	res.redirect("/cafes/" + cafe.name);
 });
 
-router.post('/', async function(req, res, next) {
+router.post('/submit', async function(req, res, next) {
 	// Wi-fi
 	let wifiAvailable, wifiName, wifiPassword, wifiFast;
 	if (req.body.wifiAvailable == "on") {
