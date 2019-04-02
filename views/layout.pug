@@ -1,33 +1,36 @@
 doctype html
 html
 	head
-		title=title
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T", crossorigin="anonymous")
-		script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js", integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM", crossorigin="anonymous")
-		script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js", integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o", crossorigin="anonymous")
+
 		script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
-		script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
-		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+		script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js", integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o", crossorigin="anonymous")
+
+		title=title
 		block scripts
 
 		block active
 			-var selected = "Home";
 		-var menu = {"Home": "/", "About": "/about", "Cafes": "/cafes"};
 	body
-		nav(class="navbar navbar-expand-xl bg-royalblue navbar-dark")
-			a(class="navbar-brand", href='#') TeaWork
+		nav.navbar.navbar-expand-xl.bg-royalblue.navbar-dark
+			a.navbar-brand(href='#') TeaWork
 				//- img(src="/images/logo.png", alt="TeaWork", style="width:40px")
 			//- button(class="navbar-toggler", type="button", data-toggle="collapse", data-target="#collapsibleNavbar")
 			button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsibleNavbar')
-				span(class="navbar-toggler-icon")
-			div(class="collapse navbar-collapse", id="collapsibleNavbar")
+				span.navbar-toggler-icon
+			div.collapse.navbar-collapse#collapsibleNavbar
 				ul.navbar-nav
 					each link, title in menu
 						if selected === title
-							li(class="nav-item active")
-								a(class="nav-link", href=link)=title
+							li.nav-item.active
+								a.nav-link(href=link)=title
 						else
-							li(class="nav-item")
-								a(class="nav-link", href=link)=title
+							li.nav-item
+								a.nav-link(href=link)=title
+				form 
 		block content

@@ -130,6 +130,7 @@ router.get('/:type', async function(req, res, next) {
 	// });
 });
 
+// Update information
 router.patch("/:cafes", async function(req, res, next) {
 	await cafe.save();
 	res.redirect("/cafes/" + cafe.name);
