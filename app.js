@@ -6,10 +6,6 @@ let path = require("path");
 let cookieParser = require("cookie-parser");
 let logger = require("morgan");
 
-let passport = require("passport");
-let LocalStrategy = require("passport-local").Strategy;
-let session = require("connect-ensure-login");
-
 let about = require("./routes/about");
 let home = require("./routes/home");
 let cafes = require("./routes/cafes");
@@ -17,6 +13,11 @@ let exit = require("./routes/exit");
 let login = require("./routes/login");
 
 let app = express();
+
+
+let passport = require("passport");
+let LocalStrategy = require("passport-local").Strategy;
+let ensure = require("connect-ensure-login");
 
 /*
 var db = require("./db");
@@ -89,6 +90,9 @@ app.post("/",
 	}
 );
 	
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
@@ -97,13 +101,10 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
 app.use(logger("dev"));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use("/", home);
 app.use("/about", about);

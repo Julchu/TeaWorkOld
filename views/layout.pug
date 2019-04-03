@@ -15,7 +15,7 @@ html
 
 		block active
 			-var selected = "Home";
-		-var menu = {"Home": "/", "About": "/about", "Cafes": "/cafes"};
+		-var menu = {"Home": "/", "About": "/about", "Cafés": "/cafes"};
 	body
 		nav.navbar.navbar-expand-xl.bg-royalblue.navbar-dark
 			a.navbar-brand(href='#') TeaWork
@@ -33,7 +33,7 @@ html
 							li.nav-item
 								a.nav-link(href=link)=title
 				form.form-inline(action="/cafes/")
-					input.form-control.mr-sm-2(type="text", placeholder="Search for a cafe")
+					input.form-control.mr-sm-2(type="text", placeholder="Search for a café")
 					button.btn.btn-light Search
 					//- Replace with filter system
 		block content

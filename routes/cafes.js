@@ -19,8 +19,8 @@ let cafeSchema = new mongoose.Schema({
 	name: {type: String, default: "Name"},
 	type: {
 		type: String,
-		default: "Cafe",
-		enum: ["Cafe", "Restaurant", "Other"]
+		default: "Café",
+		enum: ["Café", "Restaurant", "Other"]
 	},
 	wifi: {
 		available: {type: Boolean, default: false},
@@ -47,7 +47,7 @@ let cafeSchema = new mongoose.Schema({
 	parking: {type: Boolean, default: false}
 });
 
-let Cafe = mongoose.model("Cafe", cafeSchema, "Cafes");
+let Cafe = mongoose.model("Cafe", cafeSchema, "Cafés");
 
 router.get('/', async function(req, res, next) {
 	let cafeList = {"cafes": []};
@@ -81,8 +81,8 @@ router.get('/', async function(req, res, next) {
 		});
 	} else {
 		res.render("cafes", {
-			title: "Cafes",
-			about: "List of cafes",
+			title: "Cafés",
+			about: "List of cafés",
 			cafeTypes: cafeSchema.paths.type.enumValues
 		});
 	}
@@ -90,7 +90,7 @@ router.get('/', async function(req, res, next) {
 
 router.get("/submit", async function(req, res, next) {
 	res.render("submit", {
-		title: "New Cafe", 
+		title: "New Café", 
 		cafeTypes: cafeSchema.paths.type.enumValues
 	})
 });
@@ -104,8 +104,8 @@ router.get('/:cafes', async function(req, res, next) {
 		title = req.params.cafes;
 		content = cafe;
 	} else {
-		title = "Cafe Not Found";
-		content = "Search for another cafe";
+		title = "Café Not Found";
+		content = "Search for another café";
 	}
 	res.render('cafe', {
 		title: title,
@@ -161,7 +161,7 @@ router.post('/submit', async function(req, res, next) {
 	}
 	// Creating the Cafe object
 	let cafe = new Cafe({
-		name: req.body.name || "Cafes",
+		name: req.body.name || "Cafés",
 		type: req.body.type,
 		wifi: {
 			available: wifiAvailable,
