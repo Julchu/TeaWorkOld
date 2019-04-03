@@ -17,7 +17,7 @@ let app = express();
 
 let passport = require("passport");
 let LocalStrategy = require("passport-local").Strategy;
-let ensure = require("connect-ensure-login");
+let session = require('express-session');
 
 /*
 var db = require("./db");
