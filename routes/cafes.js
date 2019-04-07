@@ -50,7 +50,6 @@ let cafeSchema = new mongoose.Schema({
 let Cafe = mongoose.model("Cafe", cafeSchema, "Cafés");
 
 router.get('/', async function(req, res, next) {
-	console.log("inside cafes");
 	let cafeList = {"cafés": []};
 	let cafes = file.cafes;
 	
@@ -99,7 +98,6 @@ router.get("/submit", async function(req, res, next) {
 // Basic search function
 router.get('/:cafes', async function(req, res, next) {
 	let title, content;
-	console.log(req.body)
 	let cafe = await Cafe.findOne({name: req.params.cafes}); //, type: "Restaurant"}
 	if (cafe) {
 		title = req.params.cafes;
@@ -138,51 +136,55 @@ router.patch("/:cafes", async function(req, res, next) {
 });
 
 router.post('/submit', async function(req, res, next) {
-	// Wi-fi
-	let wifiAvailable, wifiName, wifiPassword, wifiFast;
-	if (req.body.wifiAvailable == "on") {
-		wifiAvailable = true;
-		wifiName = req.body.wifiName;
-		wifiPassword = req.body.wifiPassword;
-		wifiFast = req.body.wifiFast == "on";
-	}
-
-	// Bathroom
-	let bathroomAvailable, bathroomLocked, bathroomKey, bathroomCode, bathroomClean;
-	if (req.body.bathroomAvailable == "on") {
-		if (req.body.bathroomLocked == "on") {
-			if (req.body.bathroomKey == "on") {
-				bathroomKey = true;
-			} else {
-				bathroomCode = req.body.bathroomCode;
-			}
+	// Checking if cafe exists already
+	let exists = await Cafe.find({name: req.body.name});
+	if (exists == "") {
+		// Wi-fi
+		let wifiAvailable, wifiName, wifiPassword, wifiFast;
+		if (req.body.wifiAvailable == "on") {
+			wifiAvailable = true;
+			wifiName = req.body.wifiName;
+			wifiPassword = req.body.wifiPassword;
+			wifiFast = req.body.wifiFast == "on";
 		}
-		bathroomClean = req.body.bathroomClean == "on";
+
+		// Bathroom
+		let bathroomAvailable, bathroomLocked, bathroomKey, bathroomCode, bathroomClean;
+		if (req.body.bathroomAvailable == "on") {
+			if (req.body.bathroomLocked == "on") {
+				if (req.body.bathroomKey == "on") {
+					bathroomKey = true;
+				} else {
+					bathroomCode = req.body.bathroomCode;
+				}
+			}
+			bathroomClean = req.body.bathroomClean == "on";
+		}
+		// Creating the Cafe object
+		let cafe = new Cafe({
+			name: req.body.name || "Cafés",
+			type: req.body.type,
+			wifi: {
+				available: wifiAvailable,
+				name: wifiName,
+				password: wifiPassword,
+				fast: wifiFast
+			},
+			outlet: req.body.outlet == "on",
+			bathroom: {
+				available: bathroomAvailable,
+				locked: bathroomLocked,
+				key: bathroomKey,
+				code: bathroomCode,
+				clean: bathroomClean
+			},
+			clean: req.body.clean == "on",
+			busy: req.body.busy,
+			parking: req.body.parking == "on"
+		});
+		await cafe.save();
 	}
-	// Creating the Cafe object
-	let cafe = new Cafe({
-		name: req.body.name || "Cafés",
-		type: req.body.type,
-		wifi: {
-			available: wifiAvailable,
-			name: wifiName,
-			password: wifiPassword,
-			fast: wifiFast
-		},
-		outlet: req.body.outlet == "on",
-		bathroom: {
-			available: bathroomAvailable,
-			locked: bathroomLocked,
-			key: bathroomKey,
-			code: bathroomCode,
-			clean: bathroomClean
-		},
-		clean: req.body.clean == "on",
-		busy: req.body.busy,
-		parking: req.body.parking == "on"
-	});
-	await cafe.save();
-	res.redirect("/cafes/" + cafe.name);
+	res.redirect("/cafes/" + req.body.name);
 });
 
 module.exports = router;
