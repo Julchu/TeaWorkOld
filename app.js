@@ -15,9 +15,9 @@ let login = require("./routes/login");
 let app = express();
 
 
-let passport = require("passport");
-let LocalStrategy = require("passport-local").Strategy;
-let session = require('express-session');
+// let passport = require("passport");
+// let LocalStrategy = require("passport-local").Strategy;
+// let session = require('express-session');
 
 /*
 var db = require("./db");
@@ -58,40 +58,40 @@ passport.deserializeUser(function(id, done) {
 });*/
 
 
-passport.use(new LocalStrategy({
-	usernameField: "email",
-	passwordField: "password"
-	},
-	function(username, password, done) {
-		User.findOne({username: username}, function(err, user) {
-			if (err) {
-				return done(err);
-			}
-			if (!user) {
-				return done(null, false, { message: "Incorrect username." });
-			}
-			if (!user.validPassword(password)) {
-				return done(null, false, { message: "Incorrect password." });
-			}
-			return done(null, user);
-		})
-	}
-))
+// passport.use(new LocalStrategy({
+// 	usernameField: "email",
+// 	passwordField: "password"
+// 	},
+// 	function(username, password, done) {
+// 		User.findOne({username: username}, function(err, user) {
+// 			if (err) {
+// 				return done(err);
+// 			}
+// 			if (!user) {
+// 				return done(null, false, { message: "Incorrect username." });
+// 			}
+// 			if (!user.validPassword(password)) {
+// 				return done(null, false, { message: "Incorrect password." });
+// 			}
+// 			return done(null, user);
+// 		})
+// 	}
+// ))
 
 // if action("/") in login.pug instead of action("login"), use this POST, otherwise use login.js" POST
 // Authentication not working yet
-app.post("/", 
-	passport.authenticate("local", {
-		succesRedirect: "/cafes/",
-		failureRedirect: "/cafes"
-	}), 
-	function(req, res, next) {
-		res.redirect("/cafes/");	
-	}
-);
+// app.post("/", 
+// 	passport.authenticate("local", {
+// 		succesRedirect: "/cafes/",
+// 		failureRedirect: "/cafes"
+// 	}), 
+// 	function(req, res, next) {
+// 		res.redirect("/cafes/");	
+// 	}
+// );
 	
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, "public", "favicon.ico")));

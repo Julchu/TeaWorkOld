@@ -50,7 +50,8 @@ let cafeSchema = new mongoose.Schema({
 let Cafe = mongoose.model("Cafe", cafeSchema, "Cafés");
 
 router.get('/', async function(req, res, next) {
-	let cafeList = {"cafes": []};
+	console.log("inside cafes");
+	let cafeList = {"cafés": []};
 	let cafes = file.cafes;
 	
 	let cafeFlag = req.query["cafe"];
@@ -117,7 +118,6 @@ router.get('/:cafes', async function(req, res, next) {
 router.get('/:type', async function(req, res, next) {
 	let title, content;
 	let cafe = await Cafe.find({type: req.params.type});
-
 	// if (cafe) {
 	// 	title = req.params.cafes;
 	// 	content = cafe;

@@ -32,8 +32,9 @@ html
 						else
 							li.nav-item
 								a.nav-link(href=link)=title
-				form.form-inline(action="/cafes/")
-					input.form-control.mr-sm-2(type="text", placeholder="Search for a café")
+				form.form-inline(method="POST", action="/")
+					input.form-control.mr-sm-2(type="text", name="cafeName", placeholder="Search for a café")
 					button.btn.btn-light Search
 					//- Replace with filter system
+					//cheese
 		block content

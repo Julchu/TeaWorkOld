@@ -12,11 +12,11 @@ block content
 
 		div#Type
 			p Type:
-				select(name="type")
-					var cafeTypes = #{cafeTypes}
-					each type in cafeTypes
-						option(type=type)=type
-		div#Wifi
+			select(name="type")
+				var cafeTypes = #{cafeTypes}
+				each type in cafeTypes
+					option(type=type)=type
+		input-group.m-3
 			p Is there free Wi-Fi?
 				input(name="wifiAvailable", type="checkbox")
 			p Network name:
