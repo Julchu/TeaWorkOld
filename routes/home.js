@@ -3,9 +3,7 @@
 let express = require("express");
 let router = express.Router();
 
-
-router.post('/', async function(req, res, next) {
-	await console.log(req.body.cafeName);
+router.post('/', function(req, res, next) {
 	res.redirect("/cafes/" + req.body.cafeName);
 });
 

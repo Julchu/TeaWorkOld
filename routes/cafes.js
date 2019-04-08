@@ -62,6 +62,7 @@ router.get('/', async function(req, res, next) {
 			if (cafeFlag) {
 				if (cafes[i].type === "Cafe") {
 					cafeList.cafes.push(cafes[i]);
+					console.log("cheese");
 				}
 			} else if (restaurantFlag) {
 				if (cafes[i].type === "Restaurant") {
@@ -88,12 +89,12 @@ router.get('/', async function(req, res, next) {
 	}
 });
 
-router.get("/submit", async function(req, res, next) {
-	res.render("submit", {
-		title: "New Café", 
-		cafeTypes: cafeSchema.paths.type.enumValues
-	})
-});
+// router.get("/submit", async function(req, res, next) {
+// 	res.render("submit", {
+// 		title: "New Café", 
+// 		cafeTypes: cafeSchema.paths.type.enumValues
+// 	})
+// });
 
 // Basic search function
 router.get('/:cafes', async function(req, res, next) {
@@ -163,7 +164,7 @@ router.post('/submit', async function(req, res, next) {
 		// Creating the Cafe object
 		let cafe = new Cafe({
 			name: req.body.name || "Cafés",
-			type: req.body.type,
+			type: req.body.type || "Cafe",
 			wifi: {
 				available: wifiAvailable,
 				name: wifiName,

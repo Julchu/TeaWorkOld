@@ -59,9 +59,10 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 -- Google
 -- Facebook
 - Password encryption with BCryptJS (not BCrypt)
-- Bootstrap
+- Bootstrap 4
 -- Login page
--- Navbar
+-- Add Bootstrap cards to display submit page
+-- Add Bootstrap cards to display cafe information
 --- Search functionality
 --- Search bar fit dropdown menu
 -- Filter Tables

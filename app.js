@@ -11,6 +11,7 @@ let home = require("./routes/home");
 let cafes = require("./routes/cafes");
 let exit = require("./routes/exit");
 let login = require("./routes/login");
+let submit = require("./routes/submit");
 
 let app = express();
 
@@ -107,6 +108,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", home);
+app.use("/submit", submit);
 app.use("/about", about);
 app.use("/exit", exit);
 app.use("/cafes", cafes);

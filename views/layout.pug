@@ -10,12 +10,14 @@ html
 
 		script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js", integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o", crossorigin="anonymous")
 
+		-var menu = {"Home": "/", "About": "/about", "Cafés": "/cafes", "Submit": "/submit"};
+
 		title=title
+
 		block scripts
 
 		block active
-			-var selected = "Home";
-		-var menu = {"Home": "/", "About": "/about", "Cafés": "/cafes"};
+		
 	body
 		nav.navbar.navbar-expand-xl.bg-royalblue.navbar-dark
 			a.navbar-brand(href='#') TeaWork
@@ -32,9 +34,10 @@ html
 						else
 							li.nav-item
 								a.nav-link(href=link)=title
-				form.form-inline(method="POST", action="/")
-					input.form-control.mr-sm-2(type="text", name="cafeName", placeholder="Search for a café")
-					button.btn.btn-light Search
-					//- Replace with filter system
-					//cheese
+			
+				form(method="POST", action="/")
+					.input-group
+						input.form-control(type="text", name="cafeName", placeholder="Search for a café")
+						.input-group-append
+							button.btn.btn-primary Search
 		block content
