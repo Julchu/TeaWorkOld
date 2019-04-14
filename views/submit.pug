@@ -1,128 +1,129 @@
 extends cafes
 
-
-
 block active
 	-var selected = 'Submit';
 
 block content
-	form(method="POST", action='/cafes/submit')
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Cafe Name
-			input.form-control(name="name", type='text', placeholder="Café Name")
-			.input-group-append
-				select.btn.btn-outline-secondary.dropdown-toggle(data-toggle="dropdown", name="type")
-					each type in cafeTypes
-						option(type=type)=type
+	.jumbotron.text-center
+		h1
+	.container
+		form(method="POST", action='/cafes/submit')
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Cafe Name
+				input.form-control(name="name", type='text', placeholder="Café Name")
+				.input-group-append
+					select.btn.btn-outline-secondary.dropdown-toggle(data-toggle="dropdown", name="type")
+						each type in cafeTypes
+							option(type=type)=type
 
-		//-  Wi-fi
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Is there free Wi-Fi
-			.input-group-append
-				.input-group-text
-					input(name="wifiAvailable", type="checkbox")
+			//-  Wi-fi
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Is there free Wi-Fi
+				.input-group-append
+					.input-group-text
+						input(name="wifiAvailable", type="checkbox")
 
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Network Name
-			input.form-control(name='wifiName', placeholder='Network Name')
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Network Name
+				input.form-control(name='wifiName', placeholder='Network Name')
 
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Password
-			input.form-control(name='wifiPassword', placeholder="Password")
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Password
+				input.form-control(name='wifiPassword', placeholder="Password")
 
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Is it Wi-Fi fast
-			.input-group-append
-				.input-group-text
-					input(name="wifiFast", type="checkbox")
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Is it Wi-Fi fast
+				.input-group-append
+					.input-group-text
+						input(name="wifiFast", type="checkbox")
 
-		//-  Outlet
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Outlet
-			.input-group-append
-				.input-group-text
-					input(name="outlet", type="checkbox")
+			//-  Outlet
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Outlet
+				.input-group-append
+					.input-group-text
+						input(name="outlet", type="checkbox")
 
-		//-  Bathroom
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Are there bathrooms
-			.input-group-append
-				.input-group-text
-					input(name="bathroomAvailable", type="checkbox")
+			//-  Bathroom
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Are there bathrooms
+				.input-group-append
+					.input-group-text
+						input(name="bathroomAvailable", type="checkbox")
 
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Are they locked?
-			.input-group-append
-				.input-group-text
-					input(name="bathroomLocked", type="checkbox")
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Are they locked?
+				.input-group-append
+					.input-group-text
+						input(name="bathroomLocked", type="checkbox")
 
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text If so, is it locked by key
-			.input-group-append
-				.input-group-text
-					input(name="bathroomKey", type="checkbox")
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text If so, is it locked by key
+				.input-group-append
+					.input-group-text
+						input(name="bathroomKey", type="checkbox")
 
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text If not, what is the code
-			.input-group-append
-				.input-group-text
-					input(name="bathroomCode", type="checkbox")
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text If not, what is the code
+				.input-group-append
+					.input-group-text
+						input(name="bathroomCode", type="checkbox")
 
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Are they clean
-			.input-group-append
-				.input-group-text
-					input(name="bathroomClean", type="checkbox")
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Are they clean
+				.input-group-append
+					.input-group-text
+						input(name="bathroomClean", type="checkbox")
 
-		//-  Clean
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Is the place clean
-			.input-group-append
-				.input-group-text
-					input(name="clean", type="checkbox")
+			//-  Clean
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Is the place clean
+				.input-group-append
+					.input-group-text
+						input(name="clean", type="checkbox")
 
-		//-  Busy
-		.input-group.m-3.w-50
-			span.input-group-text When is the place busy
+			//-  Busy
+			.input-group.m-3.w-50
+				span.input-group-text When is the place busy
 
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Morning
-			.input-group-append
-				.input-group-text
-					input(name="busyMorning", type="checkbox")
-			.input-group-append
-				span.input-group-text Noon
-			.input-group-append
-				.input-group-text
-					input(name="busyNoon", type="checkbox")
-			.input-group-append
-				span.input-group-text Night
-			.input-group-append
-				.input-group-text
-					input(name="busyNight", type="checkbox")
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Morning
+				.input-group-append
+					.input-group-text
+						input(name="busyMorning", type="checkbox")
+				.input-group-append
+					span.input-group-text Noon
+				.input-group-append
+					.input-group-text
+						input(name="busyNoon", type="checkbox")
+				.input-group-append
+					span.input-group-text Night
+				.input-group-append
+					.input-group-text
+						input(name="busyNight", type="checkbox")
 
-		//-  Parking					
-		.input-group.m-3.w-50
-			.input-group-prepend
-				span.input-group-text Free parking nearby
-			.input-group-append
-				.input-group-text
-					input(name="parking", type="checkbox")
+			//-  Parking					
+			.input-group.m-3.w-50
+				.input-group-prepend
+					span.input-group-text Free parking nearby
+				.input-group-append
+					.input-group-text
+						input(name="parking", type="checkbox")
 
-		//-  Save
-		.btn-group.m-3
-			button.btn.btn.btn-primary(name="save") Save
-			button.btn.btn.btn-outline-secondary(name="reset", type="reset") Reset
+			//-  Save
+			.btn-group.m-3
+				button.btn.btn.btn-primary(name="save") Save
+				button.btn.btn.btn-outline-secondary(name="reset", type="reset") Reset

@@ -62,7 +62,6 @@ router.get('/', async function(req, res, next) {
 			if (cafeFlag) {
 				if (cafes[i].type === "Cafe") {
 					cafeList.cafes.push(cafes[i]);
-					console.log("cheese");
 				}
 			} else if (restaurantFlag) {
 				if (cafes[i].type === "Restaurant") {
@@ -187,6 +186,11 @@ router.post('/submit', async function(req, res, next) {
 	}
 	res.redirect("/cafes/" + req.body.name);
 });
+
+// module.exports = {
+// 	router: router, 
+// 	cafeSchema: cafeSchema
+// }
 
 module.exports = router;
 
