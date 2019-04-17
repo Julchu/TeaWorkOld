@@ -1,6 +1,10 @@
 extends layout
 
 block scripts
+	script(src='/javascripts/maps.js')
+	//- script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=" + uri + "&callback=initMap")
+
+	script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvfLFLuou2MsbXue_o7v7ws3yXrYvtfxg&callback=initMap")
 
 block content
-
+	#map
