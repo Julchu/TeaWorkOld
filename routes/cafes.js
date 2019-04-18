@@ -1,53 +1,10 @@
 "use strict";
 
 let express = require('express');
-let mongoose = require('mongoose');
 let router = express.Router();
+let Cafe = require("./mongo");
+
 let file = require('./cafes.json');
-
-let uri = "";
-if (typeof process.env.MONGODB_URI == 'undefined') {
-	uri = "mongodb://heroku_v670xkbh:km62gbjl3mf08ajvul3a7q49c8@ds051524.mlab.com:51524/heroku_v670xkbh";
-} else {
-	uri = process.env.MONGODB_URI;
-}
-
-mongoose.connect(uri, {useNewUrlParser: true});
-
-// Describing schema (class attributes) cafeSchema for Cafe class
-let cafeSchema = new mongoose.Schema({
-	name: {type: String, default: "Name"},
-	type: {
-		type: String,
-		default: "Café",
-		enum: ["Café", "Restaurant", "Other"]
-	},
-	wifi: {
-		available: {type: Boolean, default: false},
-		name: {type: String, default: ""},
-		
-		// TODO: encrypt password
-		password: {type: String, default: ""},
-		fast: {type: Boolean, default: false}
-	},
-	outlet: {type: Boolean, default: false},
-	bathroom: {
-		available: {type: Boolean, default: false},
-		locked: {type: Boolean, default: false},
-		key: {type: Boolean, default: false},
-		code: {type: String, default: ""},
-		clean: {type: Boolean, default: false}
-	},
-	clean: {type: Boolean, default: true},
-	busy: {
-		morning: {type: Boolean, default: false},
-		afternoon: {type: Boolean, default: false},
-		evening: {type: Boolean, default: false}
-	},
-	parking: {type: Boolean, default: false}
-});
-
-let Cafe = mongoose.model("Cafe", cafeSchema, "Cafés");
 
 router.get('/', async function(req, res, next) {
 	let cafeList = {"cafés": []};
@@ -83,7 +40,7 @@ router.get('/', async function(req, res, next) {
 		res.render("cafes", {
 			title: "Cafés",
 			about: "List of cafés",
-			cafeTypes: cafeSchema.paths.type.enumValues
+			cafeTypes: Cafe.schema.obj.type.enum
 		});
 	}
 });
@@ -91,7 +48,7 @@ router.get('/', async function(req, res, next) {
 // router.get("/submit", async function(req, res, next) {
 // 	res.render("submit", {
 // 		title: "New Café", 
-// 		cafeTypes: cafeSchema.paths.type.enumValues
+// 		cafeTypes: Cafe.paths.type.enumValues
 // 	})
 // });
 
@@ -130,10 +87,10 @@ router.get('/:type', async function(req, res, next) {
 });
 
 // Update information
-router.patch("/:cafes", async function(req, res, next) {
-	await cafe.save();
-	res.redirect("/cafes/" + cafe.name);
-});
+// router.patch("/:cafes", async function(req, res, next) {
+// 	await cafe.save();
+// 	res.redirect("/cafes/" + cafe.name);
+// });
 
 router.post('/submit', async function(req, res, next) {
 	// Checking if cafe exists already
@@ -186,11 +143,6 @@ router.post('/submit', async function(req, res, next) {
 	}
 	res.redirect("/cafes/" + req.body.name);
 });
-
-// module.exports = {
-// 	router: router, 
-// 	cafeSchema: cafeSchema
-// }
 
 module.exports = router;
 
