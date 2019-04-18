@@ -1,11 +1,22 @@
 extends layout
 
+block styles
+
+block scripts
+	script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=" + uri + "&callback=initMap")
+	script(src='/javascripts/maps.js')
+
 block active
 	-var selected = "Home";
 	
 block content
-	.jumbotron.text-center
-		h1 #{title}
-		p Welcome to #{title}
+	.row.map
+		.col
+			#map
+		.col
+			.jumbotron.text-center
+				h1 #{title}
+				p Welcome to #{title}
+	
 
 

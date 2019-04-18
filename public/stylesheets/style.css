@@ -1,21 +1,20 @@
-/*body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body {
+	/*padding: 50px;*/
+	/*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+	font: 14px: "Trebuchet MS", Helvetica, sans-serif; 
+	height: 100%;
 }
 
-a {
-  color: #00B7FF;
-}
-*/
 .bg-royalblue {
 	background-color: RoyalBlue;
 }
 
 #map {
+	min-height: 100%;
 	height: 100%;
 }
 
-html, body {
+/*html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;

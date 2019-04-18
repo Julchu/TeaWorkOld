@@ -12,7 +12,6 @@ let cafes = require("./routes/cafes");
 let exit = require("./routes/exit");
 let login = require("./routes/login");
 let submit = require("./routes/submit");
-let maps = require("./routes/maps");
 
 let app = express();
 
@@ -113,7 +112,6 @@ app.use("/about", about);
 app.use("/exit", exit);
 app.use("/cafes", cafes);
 app.use("/login", login);
-app.use("/maps", maps);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
