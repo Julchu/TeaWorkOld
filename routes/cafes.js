@@ -69,7 +69,7 @@ router.get('/:cafes', async function(req, res, next) {
 	});
 });
 
-// Search based on type of place
+// Search based on type of place; use url parameters instead
 router.get('/:type', async function(req, res, next) {
 	let title, content;
 	let cafe = await Cafe.find({type: req.params.type});

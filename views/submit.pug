@@ -5,7 +5,8 @@ block active
 
 block content
 	.jumbotron.text-center
-		h1
+		h1 #{title}
+		p #{about}
 	.container
 		form(method="POST", action='/cafes/submit')
 			.input-group.m-3.w-50

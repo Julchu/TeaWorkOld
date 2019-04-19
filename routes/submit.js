@@ -9,6 +9,7 @@ let Cafe = require("./mongo");
 router.get("/", async function(req, res, next) {
 	res.render("submit", {
 		title: "New Café", 
+		about:"Add new information about a café",
 		cafeTypes: Cafe.schema.obj.type.enum
 	});
 });
