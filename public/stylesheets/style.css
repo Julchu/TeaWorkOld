@@ -22,3 +22,17 @@ body {
 	height: 90%;
 	background-color: grey;
 }
+
+.c1 {
+	background: blue;
+	padding: 0px;
+	margin: 0px;
+}
+
+.c2 {
+	background: yellow;
+}
+
+.c3 {
+	background: red;
+}
