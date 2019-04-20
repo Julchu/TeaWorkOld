@@ -32,25 +32,17 @@ router.get('/', async function(req, res, next) {
 				cafeList.cafes.push(cafes[i]);
 			}
 		}
-		res.render('cafes', {
+		res.render("cafe", {
 			title: cafeList.cafes[0].name,
-			cafeWifi: cafeList.cafes[0].wifi
+			content: cafeList.cafes[0].wifi
 		});
 	} else {
-		res.render("cafes", {
+		res.render("cafe", {
 			title: "Cafés",
-			about: "List of cafés",
-			cafeTypes: Cafe.schema.obj.type.enum
+			content: "List of cafés",
 		});
 	}
 });
-
-// router.get("/submit", async function(req, res, next) {
-// 	res.render("submit", {
-// 		title: "New Café", 
-// 		cafeTypes: Cafe.paths.type.enumValues
-// 	})
-// });
 
 // Basic search function
 router.get('/:cafes', async function(req, res, next) {
@@ -90,6 +82,13 @@ router.get('/:type', async function(req, res, next) {
 // router.patch("/:cafes", async function(req, res, next) {
 // 	await cafe.save();
 // 	res.redirect("/cafes/" + cafe.name);
+// });
+
+// router.get("/submit", async function(req, res, next) {
+// 	res.render("submit", {
+// 		title: "New Café", 
+// 		cafeTypes: Cafe.paths.type.enumValues
+// 	})
 // });
 
 router.post('/submit', async function(req, res, next) {
@@ -145,6 +144,8 @@ router.post('/submit', async function(req, res, next) {
 });
 
 module.exports = router;
+
+// cafeTypes: Cafe.schema.obj.type.enum
 
 // if (inventory_count > 0) {
 // 	product[0].inventory_count -= 1;

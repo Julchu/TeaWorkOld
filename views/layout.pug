@@ -3,8 +3,10 @@ html
 	head
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 		
-		link(rel='stylesheet', href='/stylesheets/style.css')
+		
 		link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T", crossorigin="anonymous")
+
+		link(rel='stylesheet', href='/stylesheets/style.css')
 
 		script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
 
@@ -21,26 +23,4 @@ html
 		block active
 		
 	body
-		header
-			nav.navbar.navbar-expand-xl.bg-royalblue.navbar-dark
-				a.navbar-brand(href='/#') TeaWork
-					//- img(src="/images/logo.png", alt="TeaWork", style="width:40px")
-				//- button(class="navbar-toggler", type="button", data-toggle="collapse", data-target="#collapsibleNavbar")
-				button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsibleNavbar')
-					span.navbar-toggler-icon
-				.collapse.navbar-collapse#collapsibleNavbar
-					ul.navbar-nav
-						each link, title in menu
-							if selected === title
-								li.nav-item.active
-									a.nav-link(href=link)=title
-							else
-								li.nav-item
-									a.nav-link(href=link)=title
-				
-					form(method="POST", action="/")
-						.input-group
-							input.form-control(type="text", name="cafeName", placeholder="Search for a café")
-							.input-group-append
-								button.btn.btn-primary Search
 		block content

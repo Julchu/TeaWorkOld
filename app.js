@@ -5,6 +5,7 @@ let express = require("express");
 let path = require("path");
 let cookieParser = require("cookie-parser");
 let logger = require("morgan");
+let favicon = require('serve-favicon');
 
 let about = require("./routes/about");
 let home = require("./routes/home");
@@ -94,7 +95,7 @@ passport.deserializeUser(function(id, done) {
 // app.use(passport.session());
 
 // Uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
+app.use(favicon(path.join(__dirname, "public/images", "logoColor.png")));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

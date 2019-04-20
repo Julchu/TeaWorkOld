@@ -10,8 +10,19 @@ block active
 	-var selected = "Home";
 	
 block content
-	//- .container
-	#map
+	include navbar
+	//- .map
+	//- 	#map
+	.container-fluid
+		.row
+			.col-md-6.map
+				#map
+			.col-md-6.map
+				.jumbotron.jumbotron-fluid.text-center.bg-muted
+					h1.text-center #{title}
+					p.text-center Welcome to #{title}
+				//- include cafes
+				iframe(src="cafes")
 	//- .row
 	//- 	.col
 			

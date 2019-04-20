@@ -4,6 +4,7 @@ block active
 	-var selected = 'Submit';
 
 block content
+	include navbar
 	.jumbotron.text-center
 		h1 #{title}
 		p #{about}
@@ -11,6 +12,7 @@ block content
 		form(method="POST", action='/cafes/submit')
 			.row
 				.col-sm-4.c1
+					//- Cafe name
 					.input-group.m-3.w-100
 						.input-group-prepend
 							span.input-group-text Cafe Name
@@ -75,7 +77,6 @@ block content
 						.input-group-append
 							.input-group-text
 								input(name="bathroomCode", type="checkbox")
-
 					.input-group.m-3.w-100
 						.input-group-prepend
 							span.input-group-text Are they clean
