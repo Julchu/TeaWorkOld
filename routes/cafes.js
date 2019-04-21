@@ -37,34 +37,42 @@ router.get('/', async function(req, res, next) {
 			content: cafeList.cafes[0].wifi
 		});
 	} else {
-		res.render("cafe", {
+		let title, content;
+		let cafes = await Cafe.find(); // .limit(5); // Limits to 5 documents
+		if (cafes) {
+			content = cafes;
+		}
+		res.render("cafes", {
 			title: "Cafés",
-			content: "List of cafés",
+			about: "List of cafés",
+			content: content
 		});
 	}
 });
 
 // Basic search function
 router.get('/:cafes', async function(req, res, next) {
-	let title, content;
+	let title, content, about;
 	let cafe = await Cafe.findOne({name: req.params.cafes}); //, type: "Restaurant"}
 	if (cafe) {
 		title = req.params.cafes;
+		about = "About " + title;
 		content = cafe;
 	} else {
 		title = "Café Not Found";
-		content = "Search for another café";
+		about = "Search for another café";
 	}
 	res.render('cafe', {
 		title: title,
+		about: about,
 		content: content
 	});
 });
 
 // Search based on type of place; use url parameters instead
-router.get('/:type', async function(req, res, next) {
-	let title, content;
-	let cafe = await Cafe.find({type: req.params.type});
+// router.get('/:type', async function(req, res, next) {
+// 	let title, content;
+// 	let cafe = await Cafe.find({type: req.params.type});
 	// if (cafe) {
 	// 	title = req.params.cafes;
 	// 	content = cafe;
@@ -76,7 +84,7 @@ router.get('/:type', async function(req, res, next) {
 	// 	title: title,
 	// 	content: content
 	// });
-});
+// });
 
 // Update information
 // router.patch("/:cafes", async function(req, res, next) {
@@ -91,61 +99,7 @@ router.get('/:type', async function(req, res, next) {
 // 	})
 // });
 
-router.post('/submit', async function(req, res, next) {
-	// Checking if cafe exists already
-	let exists = await Cafe.find({name: req.body.name});
-	if (exists == "") {
-		// Wi-fi
-		let wifiAvailable, wifiName, wifiPassword, wifiFast;
-		if (req.body.wifiAvailable == "on") {
-			wifiAvailable = true;
-			wifiName = req.body.wifiName;
-			wifiPassword = req.body.wifiPassword;
-			wifiFast = req.body.wifiFast == "on";
-		}
-
-		// Bathroom
-		let bathroomAvailable, bathroomLocked, bathroomKey, bathroomCode, bathroomClean;
-		if (req.body.bathroomAvailable == "on") {
-			if (req.body.bathroomLocked == "on") {
-				if (req.body.bathroomKey == "on") {
-					bathroomKey = true;
-				} else {
-					bathroomCode = req.body.bathroomCode;
-				}
-			}
-			bathroomClean = req.body.bathroomClean == "on";
-		}
-		// Creating the Cafe object
-		let cafe = new Cafe({
-			name: req.body.name || "Cafés",
-			type: req.body.type || "Cafe",
-			wifi: {
-				available: wifiAvailable,
-				name: wifiName,
-				password: wifiPassword,
-				fast: wifiFast
-			},
-			outlet: req.body.outlet == "on",
-			bathroom: {
-				available: bathroomAvailable,
-				locked: bathroomLocked,
-				key: bathroomKey,
-				code: bathroomCode,
-				clean: bathroomClean
-			},
-			clean: req.body.clean == "on",
-			busy: req.body.busy,
-			parking: req.body.parking == "on"
-		});
-		await cafe.save();
-	}
-	res.redirect("/cafes/" + req.body.name);
-});
-
 module.exports = router;
-
-// cafeTypes: Cafe.schema.obj.type.enum
 
 // if (inventory_count > 0) {
 // 	product[0].inventory_count -= 1;

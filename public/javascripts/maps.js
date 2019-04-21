@@ -1,5 +1,11 @@
 "use strict";
 
+function load() {
+	var parent = document.getElementById('container1');
+	var child = document.getElementById('container2');
+	child.style.padding = child.offsetWidth - child.clientWidth + "px";
+}
+
 function initMap() {
 	let map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: -34.397, lng: 150.644},

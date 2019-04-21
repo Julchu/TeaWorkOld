@@ -50,29 +50,39 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 ```
 ## // TODO: 
 ```
+- HTML
+-- Prevent duplicate loading of scripts on home page's include (/mixin)
+
 - NodeJS
 -- Implement update/overwrite/merge functionality
 -- Implement functionality to search by filter
+
 - User sessions with PassportJS
 -- Get authentication working
 -- Local
 -- Google
 -- Facebook
+
 - Password encryption with BCryptJS (not BCrypt)
+
 - Bootstrap 4
 -- Login page
 -- Add Bootstrap cards to display submit page
 -- Add Bootstrap cards to display cafe information
 --- Search functionality
 --- Search bar fit dropdown menu
+
 -- Filter Tables
+
 - jQuery, React, React Native
 ```
 
 ## Links
 - Convert HTML/Pug
 -- https://html2jade.org/
+
 - Nav bar tutorial
 -- https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp
+
 - Collapsable nav bar
 -- https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_navbar_collapse

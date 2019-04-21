@@ -1,22 +1,42 @@
 header
-	nav.navbar.navbar-expand-xl.bg-royalblue.navbar-dark
+	nav.navbar.bg-royalblue.navbar-dark.navbar-expand
 		a.navbar-brand(href='/#') TeaWork
-			//- img(src="/images/logo.png", alt="TeaWork", style="width:40px")
-		//- button(class="navbar-toggler", type="button", data-toggle="collapse", data-target="#collapsibleNavbar")
-		button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsibleNavbar')
-			span.navbar-toggler-icon
-		.collapse.navbar-collapse#collapsibleNavbar
-			ul.navbar-nav
-				each link, title in menu
-					if selected === title
-						li.nav-item.active
-							a.nav-link(href=link)=title
-					else
-						li.nav-item
-							a.nav-link(href=link)=title
+			//- img(src="/images/logo.png", alt="TeaWork", style="width:40px")	
+		ul.navbar-nav
+			each link, title in menu
+				if selected === title
+					li.nav-item.active
+						a.nav-link(href=link)=title
+				else
+					li.nav-item
+						a.nav-link(href=link)=title
+			.nav-item
+				form(method="POST", action="/")
+					.input-group
+						input.form-control(type="search", name="cafeName", placeholder="Search for a café")
+						.input-group-append
+							button.btn.btn-light
+								i.fas.fa-search(style="color: royalblue")
+
+
+//- header
+//- 	nav.navbar.navbar-expand-xl.bg-royalblue.navbar-dark
+//- 		a.navbar-brand(href='/#') TeaWork
+//- 			//- img(src="/images/logo.png", alt="TeaWork", style="width:40px")	
+//- 		button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsibleNavbar')
+//- 			span.navbar-toggler-icon
+//- 		.collapse.navbar-collapse#collapsibleNavbar
+//- 			ul.navbar-nav
+//- 				each link, title in menu
+//- 					if selected === title
+//- 						li.nav-item.active
+//- 							a.nav-link(href=link)=title
+//- 					else
+//- 						li.nav-item
+//- 							a.nav-link(href=link)=title
 		
-			form(method="POST", action="/")
-				.input-group
-					input.form-control(type="text", name="cafeName", placeholder="Search for a café")
-					.input-group-append
-						button.btn.btn-primary Search
+//- 			form(method="POST", action="/")
+//- 				.input-group
+//- 					input.form-control(type="text", name="cafeName", placeholder="Search for a café")
+//- 					.input-group-append
+//- 						button.btn.btn-primary Search

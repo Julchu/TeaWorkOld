@@ -5,16 +5,16 @@ block scripts
 
 block content
 	include navbar
-	h1 #{title}
-	p Welcome to #{title}
 	.jumbotron.text-center
+		h1 #{title}
+		p #{about}
 		form(method="POST" action='/login')
 			.form-group
-				label(for='email') Email: :
-				input#email.form-control(type='text', name="email", placeholder="Email")
+				label(for='email') Email:
+				input.form-control(type='text', name="email", placeholder="Email")
 
 			.form-group
-				label(for='password') Email: :
+				label(for='password') Password:
 				input#password.form-control(type='password', name="password", placeholder="Password")
 
 				p Show Password:

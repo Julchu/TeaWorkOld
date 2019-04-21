@@ -1,25 +1,43 @@
-extends cafes
+extends layout
 
 block active
 	-var selected = 'Cafés';
 
 block content
-	.jumbotron.text-center
-		h1 #{title}
-		p #{content}
-	h2
-		if content
-			#{content.wifi}
+	//- .jumbotron.text-center
+	//- 	h1 #{title}
+	//- 	p #{about}
+	.noselect
+	if content
+		p Name: #{content.name}
+
+		p Type: #{content.type}
+
+		if (content.wifi.available)
+			p Wifi available: #{content.wifi.available}
+			p Wifi name: #{content.wifi.name}
+			p Wifi password: #{content.wifi.password}
+			p Wifi speed: #{content.wifi.fast}
 		else
-			#{content}
+			p No free wi-fi
 
-	#Information
-		p#Name 
-			if content
-				#{content.wifi}
-			else
-				#{content}
-		p#Type
-		p#Wifi
+		p Outlet: #{content.outlet}
 
+		if (content.bathroom.available)
+			if (content.bathroom.locked)
+				if (content.bathroom.key)
+					p Bathroom requires key: #{content.bathroom.key}
+				else
+					p Bathroom code: #{content.bathroom.code}
+			p Bathroom cleanliness: #{content.bathroom.clean}
+		else
+			p No bathrooms
+
+		p Cleanliness of the #{content.type}: #{content.clean}
+
+		p Busy: #{content.busy}
+
+		br
+		br
+		br
 

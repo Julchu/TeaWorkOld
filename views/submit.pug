@@ -1,4 +1,4 @@
-extends cafes
+extends layout
 
 block active
 	-var selected = 'Submit';
@@ -9,16 +9,16 @@ block content
 		h1 #{title}
 		p #{about}
 	.container-fluid
-		form(method="POST", action='/cafes/submit')
+		form(method="POST", action='/submit')
 			.row
-				.col-sm-4.c1
+				.col-sm.c1
 					//- Cafe name
 					.input-group.m-3.w-100
 						.input-group-prepend
 							span.input-group-text Cafe Name
 						input.form-control(name="name", type='text', placeholder="Café Name")
 						.input-group-append
-							select.btn.btn-outline-secondary.dropdown-toggle(data-toggle="dropdown", name="type")
+							select.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", name="type")
 								each type in cafeTypes
 									option(type=type)=type
 
@@ -43,7 +43,7 @@ block content
 						.input-group-append
 							.input-group-text
 								input(name="wifiFast", type="checkbox")
-				.col-sm-4.c2
+				.col-sm.c2
 					//-  Outlet
 					.input-group.m-3.w-100
 						.input-group-prepend
@@ -83,7 +83,7 @@ block content
 						.input-group-append
 							.input-group-text
 								input(name="bathroomClean", type="checkbox")
-				.col-sm-4.c3
+				.col-sm.c3
 					//-  Clean
 					.input-group.m-3.w-100
 						.input-group-prepend
@@ -120,8 +120,12 @@ block content
 								input(name="parking", type="checkbox")
 			//-  Save
 			.row
-				.col-sm-4
-				.col-sm-4
+				.col-sm-12.text-center
 					.btn-group.m-3
 						button.btn.btn.btn-primary(name="save") Save
 						button.btn.btn.btn-outline-secondary(name="reset", type="reset") Reset
+
+//- p Show Password:
+//- input(id="viewPassword", type="checkbox", onclick="showPassword()")
+//- Set checkbox to submit on tickmark: onChange="this.form.submit()"
+//- view Password attribute onclick="showPassword()

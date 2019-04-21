@@ -16,13 +16,14 @@ block content
 	.container-fluid
 		.row
 			.col-md-6.map
-				#map
+				#map.shadow-lg
 			.col-md-6.map
 				.jumbotron.jumbotron-fluid.text-center.bg-muted
 					h1.text-center #{title}
 					p.text-center Welcome to #{title}
 				//- include cafes
-				iframe(src="cafes")
+				.noscrollbar(onload="load();")
+					iframe(src="cafes")
 	//- .row
 	//- 	.col
 			

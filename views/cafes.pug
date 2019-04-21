@@ -7,18 +7,47 @@ block scripts
 	script(src='/javascripts/script.js')
 
 block content
-	include navbar
-	.jumbotron.text-center
-		h1 #{title}
-		p #{about}
+	.noselect
+		if content
+			each cafe in content
+				p Name: #{cafe.name}
 
-	.container#Container
-		.row
-			.col-sm-4 One of three columns
-			.col-sm-4 One of three columns
-			.col-sm-4 One of three columns
+				p Type: #{cafe.type}
 
-//- p Show Password:
-//- input(id="viewPassword", type="checkbox", onclick="showPassword()")
-//- Set checkbox to submit on tickmark: onChange="this.form.submit()"
-//- view Password attribute onclick="showPassword()
+				if (cafe.wifi.available)
+					p Wifi available: #{cafe.wifi.available}
+					p Wifi name: #{cafe.wifi.name}
+					p Wifi password: #{cafe.wifi.password}
+					p Wifi speed: #{cafe.wifi.fast}
+				else
+					p No free wi-fi
+
+				p Outlet: #{cafe.outlet}
+
+				if (cafe.bathroom.available)
+					if (cafe.bathroom.locked)
+						if (cafe.bathroom.key)
+							p Bathroom requires key: #{cafe.bathroom.key}
+						else
+							p Bathroom code: #{cafe.bathroom.code}
+					p Bathroom cleanliness: #{cafe.bathroom.clean}
+				else
+					p No bathrooms
+
+				p Cleanliness of the #{cafe.type}: #{cafe.clean}
+
+				p Busy: #{cafe.busy}
+
+				br
+				br
+				br
+
+	//- .jumbotron.text-center
+	//- 	h1 #{title}
+	//- 	p #{about}
+
+	//- .container#Container
+	//- 	.row
+	//- 		.col-sm-4 One of three columns
+	//- 		.col-sm-4 One of three columns
+	//- 		.col-sm-4 One of three columns
