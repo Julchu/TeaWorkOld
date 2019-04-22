@@ -24,25 +24,36 @@ iframe {
 	border: 0;
 }
 
-input, select, button {
+/*input, select, button {
 	box-shadow: none;
 	border-color: yellow;
+	outline: none !important;
+}*/
+
+button:focus, button:active, input:focus, input:active, select:focus, select:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
 }
 
+/*.btn:focus,.btn:active {
+   outline: none !important;
+   box-shadow: none;
+}*/
+
 .noscrollbar {
-	height: 50vh;
-	width: 50vw;
+	height: 90vh;
+	width: 100%;
 	overflow: hidden;
 }
 
 .noselect {
-	-webkit-touch-callout: none; /* iOS Safari */
-		-webkit-user-select: none; /* Safari */
-		 -khtml-user-select: none; /* Konqueror HTML */
-			 -moz-user-select: none; /* Firefox */
-				-ms-user-select: none; /* Internet Explorer/Edge */
-						user-select: none; /* Non-prefixed version, currently
-																	supported by Chrome and Opera */
+	-webkit-touch-callout: 	none; /* iOS Safari */
+	-webkit-user-select: 	none; /* Safari */
+	-khtml-user-select: 	none; /* Konqueror HTML */
+	-moz-user-select: 		none; /* Firefox */
+	-ms-user-select: 		none; /* Internet Explorer/Edge */
+	user-select: 			none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 .bg-royalblue {

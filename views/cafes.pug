@@ -7,6 +7,9 @@ block scripts
 	script(src='/javascripts/script.js')
 
 block content
+	.jumbotron.jumbotron-fluid.text-center.bg-muted
+		h1.text-center #{title}
+		p.text-center Welcome to #{title}
 	.noselect
 		if content
 			each cafe in content
@@ -37,10 +40,6 @@ block content
 				p Cleanliness of the #{cafe.type}: #{cafe.clean}
 
 				p Busy: #{cafe.busy}
-
-				br
-				br
-				br
 
 	//- .jumbotron.text-center
 	//- 	h1 #{title}

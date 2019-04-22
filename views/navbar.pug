@@ -10,13 +10,12 @@ header
 				else
 					li.nav-item
 						a.nav-link(href=link)=title
-			.nav-item
-				form(method="POST", action="/")
-					.input-group
-						input.form-control(type="search", name="cafeName", placeholder="Search for a café")
-						.input-group-append
-							button.btn.btn-light
-								i.fas.fa-search(style="color: royalblue")
+		form(method="POST", action="/")
+			.input-group
+				input.form-control(type="search", name="cafeName", placeholder="Search for a café")
+				.input-group-append
+					button.btn.btn-light
+						i.fas.fa-search.fa-spin(style="color: royalblue")
 
 
 //- header
