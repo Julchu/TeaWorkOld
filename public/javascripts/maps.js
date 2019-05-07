@@ -6,39 +6,66 @@ function load() {
 	child.style.padding = child.offsetWidth - child.clientWidth + "px";
 }
 
+// Places API
+function nearbyPlaces(results, status) {
+	// https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=""&location=""&rankby=distance
+	if (status == google.maps.places.PlacesServiceStatus.OK) {
+		for (let i = 0; i < results.length; i++) {
+			let place = results[i];
+			createMarker(results[i]);
+		}
+	}
+}
+
+function createMarker(pos, map, title) {
+	let marker = new google.maps.Marker({
+		position: pos,
+		map: map, 
+		title: title
+		// icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+	   //	new google.maps.Size(22,22),
+	   //	new google.maps.Point(0,18),
+	   //	new google.maps.Point(11,11)),
+	});
+}
+
 function initMap() {
+	let infoWindow = new google.maps.InfoWindow;
 	let map = new google.maps.Map(document.getElementById('map'), {
-		center: {lat: -34.397, lng: 150.644},
 		mapTypeControl: false,
 		zoom: 18
 	});
-
-	let infoWindow = new google.maps.InfoWindow;
+	let service = new google.maps.places.PlacesService(map);
 
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-		let pos = {
-			lat: position.coords.latitude,
-			lng: position.coords.longitude
-		};
+			let pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
 
-		// Marker on current location
-		let marker = new google.maps.Marker({
-			position: pos,
-			map: map, 
-			title: "You are here."
-			
-			// icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
-   //                                                  new google.maps.Size(22,22),
-   //                                                  new google.maps.Point(0,18),
-   //                                                  new google.maps.Point(11,11)),
-		})
+			// Marker on current location
+			createMarker(pos, map, "You are here.")
+
 			infoWindow.setPosition(pos);
 			infoWindow.setContent('You are here.');
 			infoWindow.open(map);
 
 			// Center map on current location
 			map.setCenter(pos);
+
+			let request = {
+				location: {
+					lat: pos.lat,
+					lng: pos.lng
+				},
+				radius: "500", 
+				types: ["cafe", "restaurant", "park", "lodging", "library"]
+			};
+
+			// Display information
+			service.nearbySearch(request, nearbyPlaces);
+			
 		}, function() {
 			handleLocationError(true, infoWindow, map.getCenter());
 			});

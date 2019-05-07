@@ -53,6 +53,12 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 - HTML
 -- Prevent duplicate loading of scripts on home page's include (/mixin)
 
+- Google Maps
+-- Implement/fix Places NearbySearch
+-- Implement research on drag
+--- https://stackoverflow.com/questions/6981308/google-map-api-v3-drag-event-on-map
+--- https://stackoverflow.com/questions/28493846/search-when-i-move-the-map
+
 - NodeJS
 -- Implement update/overwrite/merge functionality
 -- Implement functionality to search by filter

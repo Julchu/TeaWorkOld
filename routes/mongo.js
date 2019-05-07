@@ -12,6 +12,8 @@ if (typeof process.env.MONGODB_URI == 'undefined') {
 
 mongoose.connect(uri, {useNewUrlParser: true});
 
+// Google Maps supported types of establishments: https://developers.google.com/places/supported_types
+
 // Describing schema (class attributes) cafeSchema for Cafe class
 let cafeSchema = new mongoose.Schema({
 	name: {type: String, default: "Name"},

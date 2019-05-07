@@ -3,7 +3,8 @@ extends layout
 block styles
 
 block scripts
-	script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=" + uri + "&callback=initMap")
+	script(async, defer, src="https://maps.googleapis.com/maps/api/js?key=" + uri + "&libraries=places&callback=initMap")
+
 	script(src='/javascripts/maps.js')
 
 block active
