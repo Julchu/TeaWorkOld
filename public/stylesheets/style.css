@@ -42,7 +42,7 @@ button:focus, button:active, input:focus, input:active, select:focus, select:act
 }*/
 
 .noscrollbar {
-	height: 90vh;
+	height: 100%;
 	width: 100%;
 	overflow: hidden;
 }

@@ -8,11 +8,12 @@ function load() {
 
 // Places API
 function nearbyPlaces(results, status) {
+	console.log(results)
 	// https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=""&location=""&rankby=distance
 	if (status == google.maps.places.PlacesServiceStatus.OK) {
 		for (let i = 0; i < results.length; i++) {
 			let place = results[i];
-			createMarker(results[i]);
+			// createMarker(results[i]);
 		}
 	}
 }
@@ -33,7 +34,8 @@ function initMap() {
 	let infoWindow = new google.maps.InfoWindow;
 	let map = new google.maps.Map(document.getElementById('map'), {
 		mapTypeControl: false,
-		zoom: 18
+		zoom: 16,
+		gestureHandling: 'cooperative'
 	});
 	let service = new google.maps.places.PlacesService(map);
 
@@ -57,11 +59,11 @@ function initMap() {
 			// Location requires ints (or smaller decimals?) to not throw error
 			let request = {
 				location: {
-					lat: parseInt(43.472752400000005),
-					lng: parseInt(-80.5248797)
+					lat: parseInt(pos.lat),
+					lng: parseInt(pos.lng)
 				},
-				radius: "500", 
-				types: ["cafe", "restaurant", "park", "lodging", "library"]
+				radius: 5000,
+				types: ["restaurant"]
 			};
 			// Display information
 			service.nearbySearch(request, nearbyPlaces);
