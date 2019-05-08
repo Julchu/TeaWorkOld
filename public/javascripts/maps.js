@@ -53,16 +53,16 @@ function initMap() {
 
 			// Center map on current location
 			map.setCenter(pos);
-
+			
+			// Location requires ints (or smaller decimals?) to not throw error
 			let request = {
 				location: {
-					lat: pos.lat,
-					lng: pos.lng
+					lat: parseInt(43.472752400000005),
+					lng: parseInt(-80.5248797)
 				},
 				radius: "500", 
 				types: ["cafe", "restaurant", "park", "lodging", "library"]
 			};
-
 			// Display information
 			service.nearbySearch(request, nearbyPlaces);
 			
