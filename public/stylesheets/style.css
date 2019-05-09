@@ -15,7 +15,8 @@ body {
 }
 
 nav {
-	height: 10vh;
+	height: 5vh;
+	/*font-size:1vw;*/
 }
 
 iframe {
@@ -63,7 +64,7 @@ button:focus, button:active, input:focus, input:active, select:focus, select:act
 .map {
 	padding: 0;
 	margin: 0;
-	height: 90vh;
+	height: 95vh;
 	width: 50vw;
 }
 
