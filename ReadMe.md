@@ -50,27 +50,27 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 ```
 ## // TODOs: 
 ```
-### HTML
+**HTML**
 -- Prevent duplicate loading of scripts on home page's include (/mixin)
 
-### Google Maps
+**Google Maps**
 -- Implement update re-search and current location circle on map move
 --- https://stackoverflow.com/questions/6981308/google-map-api-v3-drag-event-on-map
 --- https://stackoverflow.com/questions/28493846/search-when-i-move-the-map
 
-### NodeJS
+**NodeJS**
 -- Implement update/overwrite/merge functionality
 -- Implement functionality to search by filter
 
-### User sessions with PassportJS
+**User sessions with PassportJS**
 -- Get authentication working
 -- Local
 -- Google
 -- Facebook
 
-### Password encryption with BCryptJS (not BCrypt)
+**Password encryption with BCryptJS (not BCrypt)**
 
-### Bootstrap 4
+**Bootstrap 4**
 -- Fixed nav bar relative text size based on monitor size (nav bar too big on big monitor)
 -- Login page
 -- Add Bootstrap cards to display submit page
@@ -80,15 +80,15 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 
 -- Filter Tables
 
-### jQuery, React, React Native
+**jQuery, React, React Native**
 ```
 
 ## Links
-- Convert HTML/Pug
+**Convert HTML/Pug**
 -- https://html2jade.org/
 
-- Nav bar tutorial
+**Nav bar tutorial**
 -- https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp
 
-- Collapsable nav bar
+**Collapsable nav bar**
 -- https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_navbar_collapse
