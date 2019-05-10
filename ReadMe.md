@@ -48,30 +48,30 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 }
 
 ```
-## // TODO: 
+## // TODOs: 
 ```
-- HTML
+### HTML
 -- Prevent duplicate loading of scripts on home page's include (/mixin)
 
-- Google Maps
--- Implement/fix Places NearbySearch
--- Implement research on drag
+### Google Maps
+-- Implement update re-search and current location circle on map move
 --- https://stackoverflow.com/questions/6981308/google-map-api-v3-drag-event-on-map
 --- https://stackoverflow.com/questions/28493846/search-when-i-move-the-map
 
-- NodeJS
+### NodeJS
 -- Implement update/overwrite/merge functionality
 -- Implement functionality to search by filter
 
-- User sessions with PassportJS
+### User sessions with PassportJS
 -- Get authentication working
 -- Local
 -- Google
 -- Facebook
 
-- Password encryption with BCryptJS (not BCrypt)
+### Password encryption with BCryptJS (not BCrypt)
 
-- Bootstrap 4
+### Bootstrap 4
+-- Fixed nav bar relative text size based on monitor size (nav bar too big on big monitor)
 -- Login page
 -- Add Bootstrap cards to display submit page
 -- Add Bootstrap cards to display cafe information
@@ -80,7 +80,7 @@ Signing in (using Google/Facebook accounts) is required as a measure of blocking
 
 -- Filter Tables
 
-- jQuery, React, React Native
+### jQuery, React, React Native
 ```
 
 ## Links

@@ -6,18 +6,6 @@ function load() {
 	child.style.padding = child.offsetWidth - child.clientWidth + "px";
 }
 
-// Places API
-function nearbyPlaces(results, status) {
-	console.log(results)
-	// https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=""&location=""&rankby=distance
-	if (status == google.maps.places.PlacesServiceStatus.OK) {
-		for (let i = 0; i < results.length; i++) {
-			let place = results[i];
-			// createMarker(results[i]);
-		}
-	}
-}
-
 function createMarker(pos, map, title) {
 	let marker = new google.maps.Marker({
 		position: pos,
@@ -41,36 +29,62 @@ function initMap() {
 
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			let pos = {
+			let currentLocation = {
 				lat: position.coords.latitude,
 				lng: position.coords.longitude
 			};
+			
+			// TODO: implement clearing and updating circle on map move
+			let cityCircle = new google.maps.Circle({
+				map: map,
+				center: currentLocation,
+				radius: 500
+			});
 
 			// Marker on current location
-			createMarker(pos, map, "You are here.")
+			createMarker(currentLocation, map, "You are here.")
 
-			infoWindow.setPosition(pos);
+			infoWindow.setPosition(currentLocation);
 			infoWindow.setContent('You are here.');
 			infoWindow.open(map);
 
 			// Center map on current location
-			map.setCenter(pos);
+			map.setCenter(currentLocation);
 			
-			// Location requires ints (or smaller decimals?) to not throw error
 			let request = {
-				location: {
-					lat: parseInt(pos.lat),
-					lng: parseInt(pos.lng)
-				},
-				radius: 5000,
-				types: ["restaurant"]
+				location: currentLocation,
+				radius: 500,
+				types: ["cafe", "restaurant", "park", "lodging", "library"]
 			};
-			// Display information
-			service.nearbySearch(request, nearbyPlaces);
 			
+			// Places API, unable to create separate callback function and store results
+			// TODO: implement pagination for more results
+			service.nearbySearch(request, function(results, status, pagination) {
+				let places = [];
+				if (status == google.maps.places.PlacesServiceStatus.OK) {
+					// while (pagination.hasNextPage) {
+					results.forEach((place) => {
+						places.push(place);
+						let pos = place.geometry.location;
+						createMarker(pos, map, place.name);
+					});
+						// pagination.nextPage();
+					// }
+				}
+				// console.log(places);
+			});
+			
+			// places.forEach(function(place) {
+			// 	let pos = {
+			// 		lat: place.geometry.location.lat(),
+			// 		lng: place.geometry.location.lng()
+			// 	}
+			// 	createMarker(pos, map, place.name);
+			// });
+
 		}, function() {
 			handleLocationError(true, infoWindow, map.getCenter());
-			});
+		}, {enableHighAccuracy: true});
 	} else {
 		// Browser doesn't support Geolocation
 		handleLocationError(false, infoWindow, map.getCenter());

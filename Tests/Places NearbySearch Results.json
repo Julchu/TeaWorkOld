@@ -1,0 +1,27 @@
+{
+	"geometry": {
+		"location": "_.P", 
+		"viewport": "_.Q"
+	}
+	"html_attributions": []
+	"icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png"
+	"id": "a24340e251066137cdfb4da1412a19dea866348e"
+	"name": "Tangerine Asian Cuisine"
+	"opening_hours": {
+		"open_now": false
+	}
+	"photos": [{…}]
+	"place_id": "ChIJV3zQOPjW1IkRbj5cExM7Y34"
+	"plus_code": {
+		"compound_code": "VP3V+7J Markham, Ontario, Canada", 
+		"global_code": "87M2VP3V+7J"
+	}
+	"price_level": 1
+	"rating": 3.8
+	"reference": "ChIJV3zQOPjW1IkRbj5cExM7Y34"
+	"scope": "GOOGLE"
+	"types": ["restaurant", "point_of_interest", "food", "establishment"]
+	"user_ratings_total": 633
+	"vicinity": "7690 Markham Road, Markham"
+	"__proto__": Object
+}
