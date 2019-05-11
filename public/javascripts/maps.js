@@ -29,11 +29,8 @@ function initMap() {
 
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			let currentLocation = {
-				lat: position.coords.latitude,
-				lng: position.coords.longitude
-			};
-			
+			let currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
 			// TODO: implement clearing and updating circle on map move
 			let cityCircle = new google.maps.Circle({
 				map: map,
@@ -51,35 +48,52 @@ function initMap() {
 			// Center map on current location
 			map.setCenter(currentLocation);
 			
+			let places = [];
+			
+			// Search for locations
+			// Search for cafes
 			let request = {
 				location: currentLocation,
-				radius: 500,
-				types: ["cafe", "restaurant", "park", "lodging", "library"]
+				rankBy: google.maps.places.RankBy.DISTANCE,
+				type: ["cafe"]
+				// types: ["cafe", "restaurant", "park", "lodging", "library"]
 			};
 			
 			// Places API, unable to create separate callback function and store results
 			// TODO: implement pagination for more results
 			service.nearbySearch(request, function(results, status, pagination) {
-				let places = [];
 				if (status == google.maps.places.PlacesServiceStatus.OK) {
-					// while (pagination.hasNextPage) {
 					results.forEach((place) => {
 						places.push(place);
-						let pos = place.geometry.location;
-						createMarker(pos, map, place.name);
+						createMarker(place.geometry.location, map, place.name);
 					});
-						// pagination.nextPage();
-					// }
 				}
-				// console.log(places);
 			});
-			
-			// places.forEach(function(place) {
-			// 	let pos = {
-			// 		lat: place.geometry.location.lat(),
-			// 		lng: place.geometry.location.lng()
+
+			// Search for restaurants
+			// request.type = ["restaurant"];
+			// service.nearbySearch(request, function(results, status, pagination) {
+			// 	if (status == google.maps.places.PlacesServiceStatus.OK) {
+			// 		results.forEach((place) => {
+			// 			places.push(place);
+			// 			createMarker(place.geometry.location, map, place.name);
+			// 		});
 			// 	}
-			// 	createMarker(pos, map, place.name);
+			// });
+
+			// // Search for library
+			// request.type = ["library"];
+			// service.nearbySearch(request, function(results, status, pagination) {
+			// 	if (status == google.maps.places.PlacesServiceStatus.OK) {
+			// 		results.forEach((place) => {
+			// 			places.push(place);
+			// 		});
+			// 	}
+			// });
+
+			// // Marking all places
+			// places.forEach(function(place) {
+			// 	createMarker(place.geometry.location, map, place.name);
 			// });
 
 		}, function() {
