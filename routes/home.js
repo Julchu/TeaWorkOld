@@ -17,8 +17,8 @@ router.post('/', function(req, res, next) {
 });
 
 // Loading main page
-router.get("/", function(req, res, next) {
-	res.render("home", {
+router.get("/", async function(req, res, next) {
+	await res.render("home", {
 		title: "Teawork",
 		uri: uri
 	});

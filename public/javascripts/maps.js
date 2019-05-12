@@ -29,8 +29,8 @@ function initMap() {
 
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
+		// navigator.geolocation.watchPosition(function(position) {
 			let currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
 			// TODO: implement clearing and updating circle on map move
 			let cityCircle = new google.maps.Circle({
 				map: map,
@@ -104,3 +104,6 @@ function initMap() {
 		handleLocationError(false, infoWindow, map.getCenter());
 	}
 }
+
+// To return a LatLng object:
+// map.getCenter();
