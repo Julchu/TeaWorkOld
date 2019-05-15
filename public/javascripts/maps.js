@@ -6,7 +6,7 @@ function load() {
 	child.style.padding = child.offsetWidth - child.clientWidth + "px";
 }
 
-function createMarker(pos, map, title) {
+function createMarker(pos, map, title, markers) {
 	let marker = new google.maps.Marker({
 		position: pos,
 		map: map, 
@@ -16,9 +16,26 @@ function createMarker(pos, map, title) {
 	   //	new google.maps.Point(0,18),
 	   //	new google.maps.Point(11,11)),
 	});
+	markers.push(marker);
+}
+
+// Places API, unable to create separate callback function and store results
+// TODO: implement pagination for more results
+function nearbySearch(service, places, request, map, markers) {
+	service.nearbySearch(request, function(results, status, pagination) {
+		if (status == google.maps.places.PlacesServiceStatus.OK) {
+			results.forEach((place) => {
+				places.push(place);
+				createMarker(place.geometry.location, map, place.name, markers);
+			});
+		}
+	});
+	return places;
 }
 
 function initMap() {
+	let places = [];
+	let markers = [];
 	let infoWindow = new google.maps.InfoWindow;
 	let map = new google.maps.Map(document.getElementById('map'), {
 		mapTypeControl: false,
@@ -31,15 +48,17 @@ function initMap() {
 		navigator.geolocation.getCurrentPosition(function(position) {
 		// navigator.geolocation.watchPosition(function(position) {
 			let currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
 			// TODO: implement clearing and updating circle on map move
 			let cityCircle = new google.maps.Circle({
 				map: map,
 				center: currentLocation,
-				radius: 500
+				radius: 500,
+				draggable: true,
 			});
 
 			// Marker on current location
-			createMarker(currentLocation, map, "You are here.")
+			createMarker(currentLocation, map, "You are here.", markers)
 
 			infoWindow.setPosition(currentLocation);
 			infoWindow.setContent('You are here.');
@@ -47,8 +66,6 @@ function initMap() {
 
 			// Center map on current location
 			map.setCenter(currentLocation);
-			
-			let places = [];
 			
 			// Search for locations
 			// Search for cafes
@@ -58,16 +75,31 @@ function initMap() {
 				type: ["cafe"]
 				// types: ["cafe", "restaurant", "park", "lodging", "library"]
 			};
+
 			
-			// Places API, unable to create separate callback function and store results
-			// TODO: implement pagination for more results
-			service.nearbySearch(request, function(results, status, pagination) {
-				if (status == google.maps.places.PlacesServiceStatus.OK) {
-					results.forEach((place) => {
-						places.push(place);
-						createMarker(place.geometry.location, map, place.name);
-					});
-				}
+
+			places = nearbySearch(service, places, request, map, markers);
+			// console.log(currentLocation.lat(), currentLocation.lng());
+
+			// Updates current location based on map movement
+			google.maps.event.addListener(map, 'dragend', function() {
+				request.location = map.getCenter();
+				markers.forEach((marker) => {
+					marker.setMap(null);
+					markers = [];
+				});
+				places = nearbySearch(service, places, request, map, markers);
+				cityCircle.setCenter(request.location);
+			});
+
+			// Getting updated coordinates when circle is dragged
+			google.maps.event.addListener(cityCircle, 'dragend', function() {
+				request.location = cityCircle.center;
+				markers.forEach((marker) => {
+					marker.setMap(null);
+					markers = [];
+				});
+				places = nearbySearch(service, places, request, map, markers);
 			});
 
 			// Search for restaurants
