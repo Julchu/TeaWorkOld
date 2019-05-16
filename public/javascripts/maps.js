@@ -1,11 +1,5 @@
 "use strict";
 
-function load() {
-	var parent = document.getElementById('container1');
-	var child = document.getElementById('container2');
-	child.style.padding = child.offsetWidth - child.clientWidth + "px";
-}
-
 function createMarker(pos, map, title, markers) {
 	let marker = new google.maps.Marker({
 		position: pos,
