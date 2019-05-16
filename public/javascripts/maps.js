@@ -19,22 +19,32 @@ function createMarker(pos, map, title, markers) {
 	markers.push(marker);
 }
 
+function clearMarkers(markers) {
+	markers.forEach((marker) => {
+		marker.setMap(null);
+		markers = [];
+	});
+}
+
 // Places API, unable to create separate callback function and store results
 // TODO: implement pagination for more results
-function nearbySearch(service, places, request, map, markers) {
+function nearbySearch(service, request, map, markers) {
+	let places = [];
 	service.nearbySearch(request, function(results, status, pagination) {
 		if (status == google.maps.places.PlacesServiceStatus.OK) {
+			clearMarkers(markers);
+			
 			results.forEach((place) => {
 				places.push(place);
 				createMarker(place.geometry.location, map, place.name, markers);
 			});
 		}
 	});
+	console.log(places);
 	return places;
 }
 
 function initMap() {
-	let places = [];
 	let markers = [];
 	let infoWindow = new google.maps.InfoWindow;
 	let map = new google.maps.Map(document.getElementById('map'), {
@@ -68,38 +78,26 @@ function initMap() {
 			map.setCenter(currentLocation);
 			
 			// Search for locations
-			// Search for cafes
 			let request = {
 				location: currentLocation,
 				rankBy: google.maps.places.RankBy.DISTANCE,
-				type: ["cafe"]
-				// types: ["cafe", "restaurant", "park", "lodging", "library"]
+				type: ["cafe"] // types: ["cafe", "restaurant", "park", "lodging", "library"]
 			};
 
-			
-
-			places = nearbySearch(service, places, request, map, markers);
+			let places = nearbySearch(service, request, map, markers);
 			// console.log(currentLocation.lat(), currentLocation.lng());
 
 			// Updates current location based on map movement
 			google.maps.event.addListener(map, 'dragend', function() {
 				request.location = map.getCenter();
-				markers.forEach((marker) => {
-					marker.setMap(null);
-					markers = [];
-				});
-				places = nearbySearch(service, places, request, map, markers);
+				places = nearbySearch(service, request, map, markers);
 				cityCircle.setCenter(request.location);
 			});
 
 			// Getting updated coordinates when circle is dragged
 			google.maps.event.addListener(cityCircle, 'dragend', function() {
 				request.location = cityCircle.center;
-				markers.forEach((marker) => {
-					marker.setMap(null);
-					markers = [];
-				});
-				places = nearbySearch(service, places, request, map, markers);
+				places = nearbySearch(service, request, map, markers);
 			});
 
 			// Search for restaurants
