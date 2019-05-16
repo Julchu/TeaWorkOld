@@ -28,23 +28,22 @@ function clearMarkers(markers) {
 
 // Places API, unable to create separate callback function and store results
 // TODO: implement pagination for more results
-function nearbySearch(service, request, map, markers) {
-	let places = [];
+function nearbySearch(service, request, map, places, markers) {
 	service.nearbySearch(request, function(results, status, pagination) {
 		if (status == google.maps.places.PlacesServiceStatus.OK) {
+			places = [];
 			clearMarkers(markers);
-			
 			results.forEach((place) => {
 				places.push(place);
 				createMarker(place.geometry.location, map, place.name, markers);
 			});
 		}
 	});
-	console.log(places);
 	return places;
 }
 
 function initMap() {
+	let places = [];
 	let markers = [];
 	let infoWindow = new google.maps.InfoWindow;
 	let map = new google.maps.Map(document.getElementById('map'), {
@@ -84,20 +83,20 @@ function initMap() {
 				type: ["cafe"] // types: ["cafe", "restaurant", "park", "lodging", "library"]
 			};
 
-			let places = nearbySearch(service, request, map, markers);
+			places = nearbySearch(service, request, map, places, markers);
 			// console.log(currentLocation.lat(), currentLocation.lng());
 
 			// Updates current location based on map movement
 			google.maps.event.addListener(map, 'dragend', function() {
 				request.location = map.getCenter();
-				places = nearbySearch(service, request, map, markers);
+				places = nearbySearch(service, request, map, places, markers);
 				cityCircle.setCenter(request.location);
 			});
 
 			// Getting updated coordinates when circle is dragged
 			google.maps.event.addListener(cityCircle, 'dragend', function() {
 				request.location = cityCircle.center;
-				places = nearbySearch(service, request, map, markers);
+				places = nearbySearch(service, request, map, places, markers);
 			});
 
 			// Search for restaurants
