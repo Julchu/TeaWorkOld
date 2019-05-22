@@ -56,7 +56,10 @@
 	};
 
 	// ES6
-	var setNameIdsEs6 = (id, name) => ({ id: id, name: name });
+	var setNameIdsEs6 = (id, name) => ({
+		id: id,
+		name: name
+	});
 
 	console.log(setNameIdsEs6 (4, "Kyle"));   // Object {id: 4, name: "Kyle"}
 

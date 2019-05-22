@@ -36,6 +36,20 @@ function nearbySearch(service, request, map, places, markers) {
 	return places;
 }
 
+function passthrough(coordinates) {
+	// let placeholder = document.createElement("div");
+	// placeholder.innerHTML = coordinates;
+	// document.body.appendChild(placeholder);
+	// window.history.pushState("string", document.title, "/new-url");
+
+	let newUrl = "/?" + coordinates.lat() + "," + coordinates.lng();
+	if (history.pushState) {
+		window.history.pushState("string", document.title, newUrl);
+	} else {
+		document.location.href = newUrl;
+	}
+}
+
 function initMap() {
 	let places = [];
 	let markers = [];
@@ -78,6 +92,7 @@ function initMap() {
 			};
 
 			places = nearbySearch(service, request, map, places, markers);
+			passthrough(request.location);
 			// console.log(currentLocation.lat(), currentLocation.lng());
 
 			// Updates current location based on map movement
@@ -85,12 +100,14 @@ function initMap() {
 				request.location = map.getCenter();
 				places = nearbySearch(service, request, map, places, markers);
 				cityCircle.setCenter(request.location);
+				passthrough(request.location);
 			});
 
 			// Getting updated coordinates when circle is dragged
 			google.maps.event.addListener(cityCircle, 'dragend', function() {
 				request.location = cityCircle.center;
 				places = nearbySearch(service, request, map, places, markers);
+				passthrough(request.location);
 			});
 
 			// Search for restaurants
@@ -130,3 +147,4 @@ function initMap() {
 
 // To return a LatLng object:
 // map.getCenter();
+
