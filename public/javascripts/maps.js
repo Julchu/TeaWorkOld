@@ -23,6 +23,7 @@ function clearMarkers(markers) {
 // Places API, unable to create separate callback function and store results
 // TODO: implement pagination for more results
 function nearbySearch(service, request, map, places, markers) {
+	passthrough(request.location);
 	service.nearbySearch(request, function(results, status, pagination) {
 		if (status == google.maps.places.PlacesServiceStatus.OK) {
 			places = [];
@@ -37,18 +38,8 @@ function nearbySearch(service, request, map, places, markers) {
 }
 
 function passthrough(coordinates) {
-	// let placeholder = document.createElement("div");
-	// placeholder.innerHTML = coordinates;
-	// document.body.appendChild(placeholder);
-	// window.history.pushState("string", document.title, "/new-url");
-
-	let newUrl = "?lat=" + coordinates.lat() + "&lng=" + coordinates.lng();
-	if (history.pushState) {
-		window.history.pushState("string", document.title, newUrl);
-	} else {
-		document.location.href = newUrl;
-	}
-
+	document.getElementById("lat").value = coordinates.lat();
+	document.getElementById("lng").value = coordinates.lng();
 	document.getElementById("submitcoords").submit();
 }
 
@@ -94,7 +85,7 @@ function initMap() {
 			};
 
 			places = nearbySearch(service, request, map, places, markers);
-			passthrough(request.location);
+			// passthrough(request.location);
 			// console.log(currentLocation.lat(), currentLocation.lng());
 
 			// Updates current location based on map movement
@@ -102,14 +93,14 @@ function initMap() {
 				request.location = map.getCenter();
 				places = nearbySearch(service, request, map, places, markers);
 				cityCircle.setCenter(request.location);
-				passthrough(request.location);
+				// passthrough(request.location);
 			});
 
 			// Getting updated coordinates when circle is dragged
 			google.maps.event.addListener(cityCircle, 'dragend', function() {
 				request.location = cityCircle.center;
 				places = nearbySearch(service, request, map, places, markers);
-				passthrough(request.location);
+				// passthrough(request.location);
 			});
 
 			// Search for restaurants

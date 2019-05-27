@@ -2,6 +2,9 @@
 
 let express = require("express");
 let router = express.Router();
+let Places = require("./maps");
+
+console.log(Places);
 
 // Google Maps API credentials
 let uri = "";
@@ -13,8 +16,8 @@ if (typeof process.env.PLACES_URI == 'undefined') {
 
 // Getting coordinates from URL
 router.post('/', async function(req, res) {
-	console.log(req.query.lat);
-	console.log(req.query.lng);
+	console.log(req.body.lat);
+	console.log(req.body.lng);
 });
 
 // Loading main page
