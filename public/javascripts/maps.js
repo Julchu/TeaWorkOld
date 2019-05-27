@@ -42,14 +42,14 @@ function passthrough(coordinates) {
 	// document.body.appendChild(placeholder);
 	// window.history.pushState("string", document.title, "/new-url");
 
-	// let newUrl = "?lat=" + coordinates.lat() + "&lng=" + coordinates.lng();
-	// if (history.pushState) {
-	// 	window.history.pushState("string", document.title, newUrl);
-	// } else {
-	// 	document.location.href = newUrl;
-	// }
+	let newUrl = "?lat=" + coordinates.lat() + "&lng=" + coordinates.lng();
+	if (history.pushState) {
+		window.history.pushState("string", document.title, newUrl);
+	} else {
+		document.location.href = newUrl;
+	}
 
-	// document.getElementById("submitcoords").submit();
+	document.getElementById("submitcoords").submit();
 }
 
 function initMap() {
