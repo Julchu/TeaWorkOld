@@ -10,7 +10,7 @@ header
 				else
 					li.nav-item
 						a.nav-link(href=link)=title
-		form(method="POST", action="/")
+		form#search(method="POST", onsubmit="search();")
 			.input-group
 				input.form-control(type="search", name="cafeName", placeholder="Search for a café")
 				.input-group-append

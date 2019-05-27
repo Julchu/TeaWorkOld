@@ -11,19 +11,18 @@ if (typeof process.env.PLACES_URI == 'undefined') {
 	uri = process.env.PLACES_URI;
 }
 
-// Search bar
-router.post('/', function(req, res, next) {
-	res.redirect("/cafes/" + req.body.cafeName);
+// Getting coordinates from URL
+router.post('/', async function(req, res) {
+	console.log(req.query.lat);
+	console.log(req.query.lng);
 });
 
 // Loading main page
 router.get("/", async function(req, res, next) {
-
 	await res.render("home", {
 		title: "Teawork",
 		uri: uri
 	});
-	console.log(req.query);
 });
 
 module.exports = router;

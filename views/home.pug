@@ -22,6 +22,12 @@ block content
 				//- include cafes
 				.noscrollbar
 					iframe(src="cafes")
+
+	//- Hidden method to send coordinates to server using a post method
+	iframe(name='coords', style='display:none;')
+	form#submitcoords(method='post', target='coords')
+		input#coords(type='hidden')
+
 	//- .row
 	//- 	.col
 			

@@ -7,3 +7,8 @@ function showPassword(checkId, formId) {
         document.getElementById(formId).type="password";
     }
 }
+
+function search() {
+	let searchForm = document.getElementById("search");
+	searchForm.action = "/cafes/" + document.getElementsByName("cafeName")[0].value;
+}

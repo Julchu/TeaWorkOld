@@ -3,7 +3,6 @@
 let express = require('express');
 let router = express.Router();
 let Cafe = require("./mongo");
-
 let file = require('./cafes.json');
 
 router.get('/', async function(req, res, next) {
@@ -50,7 +49,25 @@ router.get('/', async function(req, res, next) {
 	}
 });
 
-// Basic search function
+// Navbar search functionality requires POST method for clean URL
+router.post('/:cafes', async function(req, res, next) {
+	let title, content, about;
+	let cafe = await Cafe.findOne({name: req.params.cafes}); //, type: "Restaurant"}
+	if (cafe) {
+		title = req.params.cafes;
+		about = "About " + title;
+		content = cafe;
+	} else {
+		title = "Café Not Found";
+	}
+	res.render('cafe', {
+		title: title,
+		about: about,
+		content: content
+	});
+});
+
+// Search functionality for URL redirection
 router.get('/:cafes', async function(req, res, next) {
 	let title, content, about;
 	let cafe = await Cafe.findOne({name: req.params.cafes}); //, type: "Restaurant"}
@@ -60,7 +77,6 @@ router.get('/:cafes', async function(req, res, next) {
 		content = cafe;
 	} else {
 		title = "Café Not Found";
-		about = "Search for another café";
 	}
 	res.render('cafe', {
 		title: title,
