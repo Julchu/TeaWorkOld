@@ -2,22 +2,15 @@
 
 let express = require("express");
 let router = express.Router();
-let Places = require("./maps");
-
-console.log(Places);
-
-// Google Maps API credentials
-let uri = "";
-if (typeof process.env.PLACES_URI == 'undefined') {
-	uri = "AIzaSyBvfLFLuou2MsbXue_o7v7ws3yXrYvtfxg";
-} else {
-	uri = process.env.PLACES_URI;
-}
+let nearbySearch = require("./maps").nearbySearch;
+let uri = require("./maps").uri;
 
 // Getting coordinates from URL
-router.post('/', async function(req, res) {
-	console.log(req.body.lat);
-	console.log(req.body.lng);
+router.post('/', function(req, res) {
+	// nearbySearch(req.body.lat + "," + req.body.lng);
+	let coordinates = req.body.lat + "," + req.body.lng;
+	// console.log(nearbySearch.toString());
+	nearbySearch(coordinates);
 });
 
 // Loading main page
