@@ -56,3 +56,5 @@ async function nearbySearch(coordinates) {
 // });
 
 module.exports = {nearbySearch, uri};
+
+// When to use client- or server-sided API: https://developers.google.com/maps/documentation/geocoding/geocoding-strategies#examples-of-client-side-and-server-side-geocoding
