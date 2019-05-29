@@ -20,40 +20,49 @@ async function nearbySearch(coordinates) {
 		rankby: "distance",
 		type: "cafe" // types: ["cafe", "restaurant", "park", "lodging", "library"]
 	};
-	await googleMapsClient.placesNearby(request, function(results, status, pagination) {
-		if (status == google.maps.places.PlacesServiceStatus.OK) {
-			let places = [];
-			// clearMarkers(markers);
-			results.forEach((place) => {
-				places.push(place);
-				// createMarker(place.geometry.location, map, place.name, markers);
-			});
-		}
-	});
-}
+	// await googleMapsClient.placesNearby(request)
+	// .asPromise().then(function(response) {
+	// 	expect(response.json.results).toEqual(
+	// 		arrayContaining([
+	// 			objectContaining({
+	// 				// name: stringMatching('McDonald\'s')
+	// 			})
+	// 		])
+	// 	);
+	// 	console.log(response);
+	// })
+};
 
 // it('gets places for a nearby search query ranked by distance', function(done) {
-// googleMaps.placesNearby({
-// 	language: 'en',
-// 	location: [-33.865, 151.038],
-// 	rankby: 'distance',
-// 	minprice: 1,
-// 	maxprice: 4,
-// 	opennow: true,
-// 	type: 'restaurant'
-// })
-// .asPromise()
-// .then(function(response) {
-// 	expect(response.json.results).toEqual(
-// 		arrayContaining([
-// 			objectContaining({
-// 				name: stringMatching('McDonald\'s')
-// 			})
-// 		])
-// 	);
-// })
+// 	await googleMapsClient.placesNearby(request)
+// 	.asPromise().then(function(response) {
+// 		expect(response.json.results).toEqual(
+// 			arrayContaining([
+// 				objectContaining({
+// 					name: stringMatching('McDonald\'s')
+// 				})
+// 			])
+// 		);
+// 	})
 // 	.then(done, fail);
 // });
+
+
+	// 	, function(results, status, pagination) {
+	// 	if (status == google.maps.places.PlacesServiceStatus.OK) {
+	// 		let places = [];
+	// 		// clearMarkers(markers);
+	// 		results.forEach((place) => {
+	// 			places.push(place);
+	// 			// createMarker(place.geometry.location, map, place.name, markers);
+	// 		});
+	// 	}
+	// }
+
+// 	);
+// }
+
+
 
 module.exports = {nearbySearch, uri};
 

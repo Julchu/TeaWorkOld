@@ -29,6 +29,7 @@ function nearbySearch(service, request, map, places, markers) {
 			places = [];
 			clearMarkers(markers);
 			results.forEach((place) => {
+				console.log(place);
 				places.push(place);
 				createMarker(place.geometry.location, map, place.name, markers);
 			});
@@ -40,7 +41,7 @@ function nearbySearch(service, request, map, places, markers) {
 function passthrough(coordinates) {
 	document.getElementById("lat").value = coordinates.lat();
 	document.getElementById("lng").value = coordinates.lng();
-	document.getElementById("submitcoords").submit();
+	// document.getElementById("submitcoords").submit();
 }
 
 function initMap() {
@@ -85,22 +86,18 @@ function initMap() {
 			};
 
 			places = nearbySearch(service, request, map, places, markers);
-			// passthrough(request.location);
-			// console.log(currentLocation.lat(), currentLocation.lng());
 
 			// Updates current location based on map movement
 			google.maps.event.addListener(map, 'dragend', function() {
 				request.location = map.getCenter();
 				places = nearbySearch(service, request, map, places, markers);
 				cityCircle.setCenter(request.location);
-				// passthrough(request.location);
 			});
 
 			// Getting updated coordinates when circle is dragged
 			google.maps.event.addListener(cityCircle, 'dragend', function() {
 				request.location = cityCircle.center;
 				places = nearbySearch(service, request, map, places, markers);
-				// passthrough(request.location);
 			});
 
 			// Search for restaurants
