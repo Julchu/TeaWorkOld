@@ -2,7 +2,7 @@
 
 let express = require('express');
 let router = express.Router();
-let Cafe = require("./mongo");
+let Cafe = require("./mongo").Cafe;
 
 router.get("/", async function(req, res, next) {
 	res.render("submit", {

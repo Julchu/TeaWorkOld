@@ -15,7 +15,7 @@ mongoose.connect(uri, {useNewUrlParser: true});
 
 // Describing schema (class attributes) cafeSchema for Cafe class
 let cafeSchema = new mongoose.Schema({
-	name: {type: String, default: "Name"},
+	name: {type: String, required: true},
 	type: {
 		type: String,
 		default: "Café",
@@ -46,6 +46,14 @@ let cafeSchema = new mongoose.Schema({
 	parking: {type: Boolean, default: false}
 });
 
-let Cafe = mongoose.model("Cafe", cafeSchema, "Cafés");
+let userSchema = new mongoose.Schema({
+	name: {type: String, required: true},
+	email: {type: String, required: true},
+	password: {type: String, required: true},
+	bookmarks: [{type: String}]
+});
 
-module.exports = Cafe;
+let Cafe = mongoose.model("Cafe", cafeSchema, "Cafés");
+let User = mongoose.model("User", userSchema, "Users");
+
+module.exports = {Cafe, User};

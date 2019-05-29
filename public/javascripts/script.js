@@ -1,10 +1,10 @@
 "use strict";
 
-function showPassword(checkId, formId) {
+function showPassword(checkId, passwordId) {
     if (document.getElementById(checkId).checked) {
-        document.getElementById(formId).type="text";
+        document.getElementById(passwordId).type="text";
     } else {
-        document.getElementById(formId).type="password";
+        document.getElementById(passwordId).type="password";
     }
 }
 

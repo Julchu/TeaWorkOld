@@ -20,7 +20,13 @@
 	var c = 'abc';
 	var c = 'abcd'; // Will work
 
-	module.exports = {objectName}: // Let you import objectName from another file
+	function functioName(test) {
+		// Test
+	}
+	module.exports = {objectName, functionName}: // Let you import objectName from another file
+	// let oN = fileName.objectName;
+	// let fN = fileName.functionName;
+	// functionName(test);
 
 	// Class template
 	class name {
