@@ -33,6 +33,7 @@ async function nearbySearch(coordinates) {
 	// })
 };
 
+// Online documentation version
 // it('gets places for a nearby search query ranked by distance', function(done) {
 // 	await googleMapsClient.placesNearby(request)
 // 	.asPromise().then(function(response) {
@@ -47,17 +48,17 @@ async function nearbySearch(coordinates) {
 // 	.then(done, fail);
 // });
 
-
-	// 	, function(results, status, pagination) {
-	// 	if (status == google.maps.places.PlacesServiceStatus.OK) {
-	// 		let places = [];
-	// 		// clearMarkers(markers);
-	// 		results.forEach((place) => {
-	// 			places.push(place);
-	// 			// createMarker(place.geometry.location, map, place.name, markers);
-	// 		});
-	// 	}
-	// }
+// Maps JavaScript version
+// 	, function(results, status, pagination) {
+// 	if (status == google.maps.places.PlacesServiceStatus.OK) {
+// 		let places = [];
+// 		// clearMarkers(markers);
+// 		results.forEach((place) => {
+// 			places.push(place);
+// 			// createMarker(place.geometry.location, map, place.name, markers);
+// 		});
+// 	}
+// }
 
 // 	);
 // }
