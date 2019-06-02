@@ -6,6 +6,9 @@ let path = require("path");
 let cookieParser = require("cookie-parser");
 let logger = require("morgan");
 let favicon = require('serve-favicon');
+// let passport = require("passport");
+// let LocalStrategy = require("passport-local").Strategy;
+// let session = require('express-session');
 
 let about = require("./routes/about");
 let home = require("./routes/home");
@@ -14,11 +17,8 @@ let exit = require("./routes/exit");
 let login = require("./routes/login");
 let submit = require("./routes/submit");
 
-let app = express();
 
-// let passport = require("passport");
-// let LocalStrategy = require("passport-local").Strategy;
-// let session = require('express-session');
+let app = express();
 
 /*
 var db = require("./db");
@@ -47,6 +47,7 @@ passport.use(new Strategy(
 // typical implementation of this is as simple as supplying the user ID when
 // serializing, and querying the user record by ID from the database when
 // deserializing.
+
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
