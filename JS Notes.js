@@ -55,10 +55,10 @@
 
 	//ES5
 	var setNameIdsEs5 = function setNameIds(id, name) {
-	  return {
-	    id: id,
-	    name: name
-	  };
+		return {
+			id: id,
+			name: name
+		};
 	};
 
 	// ES6
