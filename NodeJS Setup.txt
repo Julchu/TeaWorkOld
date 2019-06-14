@@ -1,4 +1,5 @@
-- Open cmdline (Bash, whatever) and run `npm i express -g'
+- Open cmdline (Bash, whatever) and run `npm i express-generator
+ -g'
 -- This will install ExpressJS globally (lets you run from cmdline), instead of specifically to your folder/project. I believe it stores ExpressJS modules in %APPDATA%
 
 - Run express --view=pug <projectname>: this will create a barebones project and folder hierarchy: My Documents\<projectname>
