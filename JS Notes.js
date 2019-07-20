@@ -40,7 +40,6 @@ class name {
 		return this.name;
 	}
 
-	// Set is a built-in JS setter, 
 	set name(n) {
 		this.name = n;
 	}
@@ -57,7 +56,6 @@ class name {
 var setNameIdsEs5 = function setNameIds(id, name) {
 	return {
 		id: id,
-		name: name
 	};
 };
 
@@ -68,7 +66,6 @@ var setNameIdsEs6 = (id, name) => ({
 });
 
 console.log(setNameIdsEs6(4, "Kyle"));   // Object {id: 4, name: "Kyle"}
-
 // NodeJS
 
 // In app.js
