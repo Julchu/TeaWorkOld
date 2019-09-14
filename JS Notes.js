@@ -1,99 +1,96 @@
 // JavaScript:
 
-	// Use strict JS rules (vs "everything works without reason" rules
-	// Strict JS is closer to normal programming languages in terms of making sense)
-	"use strict";
+// Use strict JS rules (vs "everything works without reason" rules
+// Strict JS is closer to normal programming languages in terms of making sense)
+"use strict";
 
-	// Variable types: 
+// Variable types: 
 
-	// Constants, cannot be altered, good for imports
-	const a = 'abc';
-	// a = 'acbd'; // Will not work because of const
+// Constants, cannot be altered, good for imports
+const a = 'abc';
+// a = 'acbd'; // Will not work because of const
 
-	// Normal variables we're used to in terms of blocks/scopes
-	// Ex: for loops, variable inside loop cannot be altered outside loop
-	let b = 'abc'
-	// let b = 'abcd'; // Will not work because you cannot redeclare variable name
-	b = 'abcd'; // Will work
+// Normal variables we're used to in terms of blocks/scopes
+// Ex: for loops, variable inside loop cannot be altered outside loop
+let b = 'abc'
+// let b = 'abcd'; // Will not work because you cannot redeclare variable name
+b = 'abcd'; // Will work
 
-	// Do not use, block-/scope-less
-	var c = 'abc';
-	var c = 'abcd'; // Will work
+// Do not use, block-/scope-less
+var c = 'abc';
+var c = 'abcd'; // Will work
 
-	function functioName(test) {
-		// Test
-	}
-	module.exports = {objectName, functionName}: // Let you import objectName from another file
-	// let oN = fileName.objectName;
-	// let fN = fileName.functionName;
-	// functionName(test);
+function functioName(test) {
+	// Test
+}
+module.exports = { objectName, functionName }: // Let you import objectName from another file
+// let oN = fileName.objectName;
+// let fN = fileName.functionName;
+// functionName(test);
 
-	// Class template
-	class name {
-		constructor(n) {
-			// Cannot assign member to variable of same name; causes infinite recursive loop
-			this.name = n;
-		}
-
-		// Get is a built-in JS getter, will return this._test
-		get name() {
-			return this.name;
-		}
-
-		// Set is a built-in JS setter, 
-		set name(n) {
-			this.name = n;
-		}
-		/*
-			The built-in getter/setter methods allow you to access/modify using `object._member` syntax
-			Ex: 
-				let n = new name("cheese");
-				n.name; // Will return "cheese"
-				n.name = "cheese2"; // Will set n.name to "cheese2"
-		*/
+// Class template
+class name {
+	constructor(n) {
+		// Cannot assign member to variable of same name; causes infinite recursive loop
+		this.name = n;
 	}
 
-	//ES5
-	var setNameIdsEs5 = function setNameIds(id, name) {
-		return {
-			id: id,
-			name: name
-		};
-	};
+	// Get is a built-in JS getter, will return this._test
+	get name() {
+		return this.name;
+	}
 
-	// ES6
-	var setNameIdsEs6 = (id, name) => ({
+	set name(n) {
+		this.name = n;
+	}
+	/*
+		The built-in getter/setter methods allow you to access/modify using `object._member` syntax
+		Ex: 
+			let n = new name("cheese");
+			n.name; // Will return "cheese"
+			n.name = "cheese2"; // Will set n.name to "cheese2"
+	*/
+}
+
+//ES5
+var setNameIdsEs5 = function setNameIds(id, name) {
+	return {
 		id: id,
-		name: name
-	});
+	};
+};
 
-	console.log(setNameIdsEs6 (4, "Kyle"));   // Object {id: 4, name: "Kyle"}
+// ES6
+var setNameIdsEs6 = (id, name) => ({
+	id: id,
+	name: name
+});
 
+console.log(setNameIdsEs6(4, "Kyle"));   // Object {id: 4, name: "Kyle"}
 // NodeJS
 
-	// In app.js
-	const about = require('./routes/about'); // Imports about about.js from routes
-	app.use('/about', about); // Waits for URL/about
+// In app.js
+const about = require('./routes/about'); // Imports about about.js from routes
+app.use('/about', about); // Waits for URL/about
 
-	// In about.js
-	router.get('/', function(req, res, next) { // Renders about page when page is called, with "/" page
-		res.render('About', { title: 'About' });
-	});
+// In about.js
+router.get('/', function (req, res, next) { // Renders about page when page is called, with "/" page
+	res.render('About', { title: 'About' });
+});
 
-	// Ex: if app.use('/', about), and router.get('/about', function(req, res, next), same result
-		// Better to use app.use('/about', about) and app.get('/') (or any subpages of about)
+// Ex: if app.use('/', about), and router.get('/about', function(req, res, next), same result
+// Better to use app.use('/about', about) and app.get('/') (or any subpages of about)
 
-	// More info: https://www.terlici.com/2014/09/29/express-router.html
-	// App.js
-	app.use('/cars', cars)
+// More info: https://www.terlici.com/2014/09/29/express-router.html
+// App.js
+app.use('/cars', cars)
 
-	// Cars.js
-	app.get('/brands')
-	app.get('/models')
+// Cars.js
+app.get('/brands')
+app.get('/models')
 
-	// URLs: URL/cars/brands, URL/cars/models
+// URLs: URL/cars/brands, URL/cars/models
 
-	
+
 
 // REST API
 /*
@@ -178,176 +175,223 @@
 */
 
 // MongoDB / Mongoose
-	// Mongoose.model() API structure: Mongoose#model(name, [schema], [collection], [skipInit])
+// Mongoose.model() API structure: Mongoose#model(name, [schema], [collection], [skipInit])
 
-	// Static methods: does not require instantiating; attributes are class-wide
-	animalSchema.statics.findByName = function(name, cb) {
-	    return this.find({ name: new RegExp(name, 'i') }, cb);
-	};
+// Static methods: does not require instantiating; attributes are class-wide
+animalSchema.statics.findByName = function (name, cb) {
+	return this.find({ name: new RegExp(name, 'i') }, cb);
+};
 
-	// Instance methods: requires instantiating; attributes are object-specific
-	animalSchema.methods.findSimilarTypes = function(cb) {
-		return this.model('Animal').find({ type: this.type }, cb);
-	};
+// Instance methods: requires instantiating; attributes are object-specific
+animalSchema.methods.findSimilarTypes = function (cb) {
+	return this.model('Animal').find({ type: this.type }, cb);
+};
 
-	// Schema, model(Schema) method
-	const animalSchema = mongoose.Schema({
-		name: {type: String, default: ""},
-		type: {type: String, default: ""},
-		sound: 	String
-	});
+// Schema, model(Schema) method
+const animalSchema = mongoose.Schema({
+	name: { type: String, default: "" },
+	type: { type: String, default: "" },
+	sound: String
+});
 
-	animalSchema.methods.speak = function() {
-		console.log(this.sound);
+animalSchema.methods.speak = function () {
+	console.log(this.sound);
+}
+
+// First argument of model(String, Schema): table will be created with name String
+const Animal = mongoose.model('Animal', animalSchema);
+
+// or model({schema parameters}) method
+const Animal = mongoose.model("Animal", {
+	name: { type: String, default: "" },
+	type: { type: String, default: "" },
+	sound: String
+});
+
+const cat = new Animal({
+	name: 'Dawg',
+	type: 'cat',
+	sound: 'Meow'
+});
+
+// Option 1 to save:
+cat.save(function (err, cat) {
+	if (err) {
+		console.log("Something wrong with MongoDB");
+	} else {
+		cat.speak();
 	}
+});
+// Option 2 to save: only creates Animal document
+Animal.create({});
 
-	// First argument of model(String, Schema): table will be created with name String
-	const Animal = mongoose.model('Animal', animalSchema);
+// Searches Wifi document model (const Wifi = mongoose.model('Wifi, wifiSchema);)
+// These do not work:
+// const Wifis = mongoose.model('Wifi', wifiSchema);
+// const Wifi = mongoose.model('Wifis', wifiSchema);
+Wifi.find({ name: "Eduroam" }, (err, wifiNetwork) => {
+	console.log(wifiNetwork);
+});
 
-	// or model({schema parameters}) method
-	const Animal = mongoose.model("Animal", {
-		name: {type: String, default: ""},
-		type: {type: String, default: ""},
-		sound: String
-	});
+// Schema subschema type: https://stackoverflow.com/questions/42019679/object-type-in-mongoose
 
-	const cat = new Animal({
-		name: 	'Dawg', 
-		type: 	'cat',
-		sound: 	'Meow'
-	});
+//	let wifiSchema = mongoose.Schema({
+// 	availability: {type: Boolean, default: false},
+// 	name: {type: String, default: ""},
+// 	// TODO: encrypt password
+// 	password: {type: String, default: ""},
+// 	speed: {type: String, default: ""}
+// });
 
-	// Option 1 to save:
-	cat.save(function (err, cat) {
-		if (err) {
-			console.log("Something wrong with MongoDB");
-		} else {
-			cat.speak();
-		}
-	});
-		// Option 2 to save: only creates Animal document
-	Animal.create({});
+// let bathroomSchema = mongoose.Schema({
+// 	availability: {type: Boolean, default: false}
 
-	// Searches Wifi document model (const Wifi = mongoose.model('Wifi, wifiSchema);)
-	// These do not work:
-		// const Wifis = mongoose.model('Wifi', wifiSchema);
-		// const Wifi = mongoose.model('Wifis', wifiSchema);
-	Wifi.find({name: "Eduroam"}, (err, wifiNetwork) => {
-		console.log(wifiNetwork);
-	});
+// }):
 
-	// Schema subschema type: https://stackoverflow.com/questions/42019679/object-type-in-mongoose
+// // Describing schema (class attributes) cafeSchema for Cafe class
+// let cafeSchema = mongoose.Schema({
+// 	name: {type: String, default: ""},
+// 	type: {type: String, default: "cafe"},
+// 	wifi: {type: wifiSchema, default: () => ({
+// 		availability: false, 
+// 		name: "", 
+// 		speed: ""})
+// 	},
+// 	bathroom: {type: bathroomSchema, default: false},
+// 	outlet: {type: Boolean, default: false}
+// });
 
-	//	let wifiSchema = mongoose.Schema({
-	// 	availability: {type: Boolean, default: false},
-	// 	name: {type: String, default: ""},
-	// 	// TODO: encrypt password
-	// 	password: {type: String, default: ""},
-	// 	speed: {type: String, default: ""}
-	// });
+// let Cafe = mongoose.model('Cafe', cafeSchema);
+// let Wifi = mongoose.model('Wifi', wifiSchema);
 
-	// let bathroomSchema = mongoose.Schema({
-	// 	availability: {type: Boolean, default: false}
-		
-	// }):
+// let addWifi = function(availability, name, password, speed) {
+// 	let wifi = new Wifi({
+// 		availability: availability,
+// 		name: name, //req.params.name,
+// 		password: password,
+// 		speed: speed
+// 	});
 
-	// // Describing schema (class attributes) cafeSchema for Cafe class
-	// let cafeSchema = mongoose.Schema({
-	// 	name: {type: String, default: ""},
-	// 	type: {type: String, default: "cafe"},
-	// 	wifi: {type: wifiSchema, default: () => ({
-	// 		availability: false, 
-	// 		name: "", 
-	// 		speed: ""})
-	// 	},
-	// 	bathroom: {type: bathroomSchema, default: false},
-	// 	outlet: {type: Boolean, default: false}
-	// });
-
-	// let Cafe = mongoose.model('Cafe', cafeSchema);
-	// let Wifi = mongoose.model('Wifi', wifiSchema);
-
-	// let addWifi = function(availability, name, password, speed) {
-	// 	let wifi = new Wifi({
-	// 		availability: availability,
-	// 		name: name, //req.params.name,
-	// 		password: password,
-	// 		speed: speed
-	// 	});
-
-	// 	return wifi;
-	// };
+// 	return wifi;
+// };
 
 // JSON
-	// Attribute types:
-		String: "t"
-		Number: 1, 0.3, 1.10
-		Object
-		Array: []
-		Boolean: true, false
-		Value
-		null
+// Attribute types:
+String: "t"
+Number: 1, 0.3, 1.10
+Object
+Array: []
+Boolean: true, false
+Value
+null
 
-	let products = req.body['products'];
-	let products = file.products;
+let products = req.body['products'];
+let products = file.products;
 
-	let inventory_count = parseInt(product.inventory_count);
-	// Access using: products[req.params.product];
+let inventory_count = parseInt(product.inventory_count);
+// Access using: products[req.params.product];
 
-	{
-		"products": {
-			"cheese": 
-			{
-				"title": "cheese",
+{
+	"products": {
+		"cheese":
+		{
+			"title": "cheese",
 				"price": "3.00",
-				"inventory_count": "27"
-			},
-			"banana":
-			{
-				"title": "banana",
+					"inventory_count": "27"
+		},
+		"banana":
+		{
+			"title": "banana",
 				"price": "0.56",
-				"inventory_count": "34"
-			},
-			"car": 
-			{
-				"title": "car",
+					"inventory_count": "34"
+		},
+		"car":
+		{
+			"title": "car",
 				"price": "32500",
-				"inventory_count": "12"
-			},
-			"potato":
-			{
-				"title": "potato",
+					"inventory_count": "12"
+		},
+		"potato":
+		{
+			"title": "potato",
 				"price": "123",
-				"inventory_count": "0"
-			}
+					"inventory_count": "0"
 		}
 	}
+}
 
-	
-	let inventory_count = parseInt(product[0].inventory_count);
-	// or products.filter(item => item.title === req.params.product);
 
-	{
-		"products": [
-			{
-				"title": "cheese",
-				"price": "3.00",
-				"inventory_count": "27"
-			},
-			{
-				"title": "banana",
-				"price": "0.56",
-				"inventory_count": "34"
-			},
-			{
-				"title": "car",
-				"price": "32500",
-				"inventory_count": "12"
-			},
-			{
-				"title": "potato",
-				"price": "123",
-				"inventory_count": "0"
-			}
-		]
-	}
+let inventory_count = parseInt(product[0].inventory_count);
+// or products.filter(item => item.title === req.params.product);
+
+{
+	"products": [
+		{
+			"title": "cheese",
+			"price": "3.00",
+			"inventory_count": "27"
+		},
+		{
+			"title": "banana",
+			"price": "0.56",
+			"inventory_count": "34"
+		},
+		{
+			"title": "car",
+			"price": "32500",
+			"inventory_count": "12"
+		},
+		{
+			"title": "potato",
+			"price": "123",
+			"inventory_count": "0"
+		}
+	]
+}
+
+// Dealing with Callback Hell using Promises
+
+// "use strict";
+
+// let express = require("express");
+// let canadaPostService = require("../services/canadaPostService");
+// let router = express.Router();
+
+// // TODO: change to POST
+// router.get('/', async function (req, res, next) {
+// 	let postalCode = req.body.postalCode;
+// 	let canadaPostRate, boxKnightRate;
+// 	let rateObject = await canadaPostService.getBestShippingRate(postalCode);
+// 	res.send(rateObject);
+// });
+
+// module.exports = router;
+
+// // console.log(canadaPostService("h9b3k8"));
+
+// "use strict";
+
+// let request = require("request");
+
+// /* Gets postalCode
+//  * Returns array of shipping rate objects
+//  * Shipping rate object example: {
+//  * 	"id": "id",
+//  * 	"description": "Canada Post Standard Delivery",
+//  * 	"price": price
+//  * 	"estimate_days": 14
+//  * }
+//  */
+// let getBestShippingRate = ((postalCode) => {
+// 	let rateObject = new Promise((resolve, reject) => {
+// 		request("https://7ywg61mqp6.execute-api.us-east-1.amazonaws.com/prod/rates/" + postalCode, (error, response, body) => {
+// 			resolve(body);
+// 			reject(error);
+// 		});
+// 	});
+// 	return rateObject;
+// });
+
+// module.exports = {
+// 	getBestShippingRate
+// };
