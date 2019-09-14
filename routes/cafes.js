@@ -2,7 +2,7 @@
 
 let express = require("express");
 let router = express.Router();
-let Cafe = require("./mongo").Cafe;
+let Cafe = require("../services/mongo").Cafe;
 let file = require("../cafes.json");
 
 router.get("/", async function(req, res, next) {

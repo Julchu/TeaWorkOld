@@ -18,11 +18,10 @@ class Index extends Component {
 	}
 
 	render() {
-		console.log(this.state.data);
 		return (
 			<>
 				<p>Welcome</p>
-				<p>{this.state.data}</p>
+				<p>{this.state.data.banana}</p>
 			</>
 		);
 	}

@@ -1,20 +1,20 @@
 "use strict";
 
-let express = require('express');
+let express = require("express");
 let router = express.Router();
-let Cafe = require("./mongo").Cafe;
+let Cafe = require("../services/mongo").Cafe;
 
 router.get("/", async function(req, res, next) {
 	res.render("submit", {
-		title: "New Café", 
-		about:"Add new information about a café",
+		title: "New Café",
+		about: "Add new information about a café",
 		cafeTypes: Cafe.schema.obj.type.enum
 	});
 });
 
 router.post("/", async function(req, res, next) {
 	// Checking if cafe exists already
-	let exists = await Cafe.find({name: req.body.name});
+	let exists = await Cafe.find({ name: req.body.name });
 	if (exists == "") {
 		// Wi-fi
 		let wifiAvailable, wifiName, wifiPassword, wifiFast;
