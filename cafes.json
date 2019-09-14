@@ -1,0 +1,112 @@
+{
+	"cafes": [
+		{
+			"name": "Starbucks",
+			"type": "Cafe",
+			"wifi": 
+			{
+				"available": true,
+				"name": "StarbucksWifi",
+				"password": "",
+				"fast": false	
+			},
+			"outlet": true,
+			"bathroom": 
+			{
+				"available": true,
+				"locked": true,
+				"key": false,
+				"code": "1234",
+				"clean": true
+			},
+			"clean": true,
+			"busy": 
+			{
+				"morning": false,
+				"afternoon": true,
+				"evening": false
+			}
+		},
+		{
+			"name": "Wilfrid Laurier University",
+			"type": "Other",
+			"wifi": 
+			{
+				"available": true,
+				"name": "Eduroam",
+				"password": "",
+				"fast": true
+			},
+			"outlet": true,
+			"bathroom": 
+			{
+				"available": true,
+				"locked": false,
+				"key": false,
+				"code": "",
+				"clean": true
+			},
+			"clean": true,
+			"busy": 
+			{
+				"morning": false,
+				"afternoon": true,
+				"evening": true
+			}
+		},
+		{
+			"name": "McDonalds",
+			"type": "Restaurant",
+			"wifi": 
+			{
+				"available": true,
+				"name": "McDonalds Wifi",
+				"password": "",
+				"fast": false
+			},
+			"outlet": false,
+			"bathroom": 
+			{
+				"available": true,
+				"locked": false,
+				"key": false,
+				"code": "",
+				"clean": false
+			},
+			"clean": false,
+			"busy": 
+			{
+				"morning": false,
+				"afternoon": true,
+				"evening": true
+			}
+		},
+		{	
+			"name": "Dagu",
+			"type": "Restaurant",
+			"wifi": 
+			{
+				"available": false,
+				"name": "",
+				"password": "",
+				"fast": false
+			},
+			"outlet": false,
+			"bathroom": 
+			{
+				"available": true,
+				"locked": false,
+				"key": false,
+				"code": "",
+				"clean": true
+			},
+			"clean": true,
+			"busy": 
+			{
+				"morning": false,
+				"afternoon": false,
+				"evening": true
+			}
+		}
+	]
+}

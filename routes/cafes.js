@@ -1,14 +1,14 @@
 "use strict";
 
-let express = require('express');
+let express = require("express");
 let router = express.Router();
 let Cafe = require("./mongo").Cafe;
-let file = require('./cafes.json');
+let file = require("../cafes.json");
 
-router.get('/', async function(req, res, next) {
-	let cafeList = {"cafés": []};
+router.get("/", async function(req, res, next) {
+	let cafeList = { cafés: [] };
 	let cafes = file.cafes;
-	
+
 	let cafeFlag = req.query["cafe"];
 	let restaurantFlag = req.query["restaurant"];
 	let otherFlag = req.query["other"];
@@ -50,9 +50,9 @@ router.get('/', async function(req, res, next) {
 });
 
 // Navbar search functionality requires POST method for clean URL
-router.post('/:cafes', async function(req, res, next) {
+router.post("/:cafes", async function(req, res, next) {
 	let title, content, about;
-	let cafe = await Cafe.findOne({name: req.params.cafes}); //, type: "Restaurant"}
+	let cafe = await Cafe.findOne({ name: req.params.cafes }); //, type: "Restaurant"}
 	if (cafe) {
 		title = req.params.cafes;
 		about = "About " + title;
@@ -60,7 +60,7 @@ router.post('/:cafes', async function(req, res, next) {
 	} else {
 		title = "Café Not Found";
 	}
-	res.render('cafe', {
+	res.render("cafe", {
 		title: title,
 		about: about,
 		content: content
@@ -68,9 +68,9 @@ router.post('/:cafes', async function(req, res, next) {
 });
 
 // Search functionality for URL redirection
-router.get('/:cafes', async function(req, res, next) {
+router.get("/:cafes", async function(req, res, next) {
 	let title, content, about;
-	let cafe = await Cafe.findOne({name: req.params.cafes}); //, type: "Restaurant"}
+	let cafe = await Cafe.findOne({ name: req.params.cafes }); //, type: "Restaurant"}
 	if (cafe) {
 		title = req.params.cafes;
 		about = "About " + title;
@@ -78,28 +78,30 @@ router.get('/:cafes', async function(req, res, next) {
 	} else {
 		title = "Café Not Found";
 	}
-	res.render('cafe', {
+	res.render("cafe", {
 		title: title,
 		about: about,
 		content: content
 	});
 });
 
+module.exports = router;
+
 // Search based on type of place; use url parameters instead
 // router.get('/:type', async function(req, res, next) {
 // 	let title, content;
 // 	let cafe = await Cafe.find({type: req.params.type});
-	// if (cafe) {
-	// 	title = req.params.cafes;
-	// 	content = cafe;
-	// } else {
-	// 	title = "Cafe Not Found";
-	// 	content = "Search for another cafe";
-	// }
-	// res.render('cafe', {
-	// 	title: title,
-	// 	content: content
-	// });
+// if (cafe) {
+// 	title = req.params.cafes;
+// 	content = cafe;
+// } else {
+// 	title = "Cafe Not Found";
+// 	content = "Search for another cafe";
+// }
+// res.render('cafe', {
+// 	title: title,
+// 	content: content
+// });
 // });
 
 // Update information
@@ -110,12 +112,10 @@ router.get('/:cafes', async function(req, res, next) {
 
 // router.get("/submit", async function(req, res, next) {
 // 	res.render("submit", {
-// 		title: "New Café", 
+// 		title: "New Café",
 // 		cafeTypes: Cafe.paths.type.enumValues
 // 	})
 // });
-
-module.exports = router;
 
 // if (inventory_count > 0) {
 // 	product[0].inventory_count -= 1;

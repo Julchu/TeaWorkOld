@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build": "cd ./client && npm install && npm run build && cd ../",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -20,5 +21,13 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
     "serve-favicon": "^2.5.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "/client/*"
+    ]
+  },
+  "devDependencies": {
+    "prettier": "1.18.2"
   }
 }
