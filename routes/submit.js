@@ -13,7 +13,7 @@ router.get("/", async function(req, res, next) {
 });
 
 router.post("/", async function(req, res, next) {
-	// Checking if cafe exists already
+	// Checking if cafe exists alreadsy
 	let exists = await Cafe.find({ name: req.body.name });
 	if (exists == "") {
 		// Wi-fi
