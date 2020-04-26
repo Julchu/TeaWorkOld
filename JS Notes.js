@@ -175,7 +175,8 @@ app.get('/models')
 */
 
 // MongoDB / Mongoose
-// Mongoose.model() API structure: Mongoose#model(name, [schema], [collection], [skipInit])
+// Mongoose.model() params: Mongoose#model(type, [schema], [collection name], [skipInit])
+// Ex: model("User") === User is true
 
 // Static methods: does not require instantiating; attributes are class-wide
 animalSchema.statics.findByName = function (name, cb) {
