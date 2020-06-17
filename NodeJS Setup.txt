@@ -1,5 +1,4 @@
-- Open cmdline (Bash, whatever) and run `npm i express-generator
- -g'
+- Open cmdline (Bash, whatever) and run `npm i express-generator -g'
 -- This will install ExpressJS globally (lets you run from cmdline), instead of specifically to your folder/project. I believe it stores ExpressJS modules in %APPDATA%
 
 - Run express --view=pug <projectname>: this will create a barebones project and folder hierarchy: My Documents\<projectname>
@@ -13,7 +12,7 @@
 
 - If you want to use a MySQL database, run command npm i mysql -s, will install MySQL (NodeJS module) specifically for your project
 
-- If you want to use a MongoDB database, you can use MongoDB (npm i mongodb -s`) and optionally Mongoose (npm i mongoose -s)
+- If you want to use a MongoDB database, you can use MongoDB (npm i mongodb) and optionally Mongoose (npm i mongoose)
 
 I've used both in different projects
 
