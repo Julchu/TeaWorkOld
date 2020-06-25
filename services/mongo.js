@@ -4,7 +4,7 @@ let mongoose = require('mongoose');
 
 let uri = "";
 if (typeof process.env.MONGODB_URI == 'undefined') {
-	uri = "mongodb://heroku_v670xkbh:km62gbjl3mf08ajvul3a7q49c8@ds051524.mlab.com:51524/heroku_v670xkbh";
+	uri = "mongodb://heroku_sncdkqzk:o0378sar6evgp12nckbv44hf3d@ds131942.mlab.com:31942/heroku_sncdkqzk";
 } else {
 	uri = process.env.MONGODB_URI;
 }
