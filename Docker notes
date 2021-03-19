@@ -1,0 +1,22 @@
+docker build -t cast .
+docker run -d --name cast -p 3000:3000 cast
+docker kill cast
+docker rm cast
+
+Dockerfile
+	FROM node:14
+
+	RUN mkdir /app
+	WORKDIR /app
+	# COPY package*.json ./
+
+	COPY . . 
+	RUN npm install
+	EXPOSE 3000
+	CMD npm start
+
+docker-compose down
+docker-compose up -d
+
+docker ps
+docker exec -it <id> /bin/sh
